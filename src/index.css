@@ -5,6 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+   /* Change the back groundcolor from here */
+  height: 100vh;
+  background: linear-gradient(#7260ad,#855d9e);
 }
 
 code {
