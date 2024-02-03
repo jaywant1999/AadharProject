@@ -17,7 +17,7 @@ import User from "./Pages/User.js";
          <div className="nav">
             <HomeNav/>
         </div>
-        {/* sanket */}
+        {/* sanket  */}
     
         <div className="App">
             <BrowserRouter>
