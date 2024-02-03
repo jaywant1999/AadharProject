@@ -5,13 +5,9 @@ function Admin(){
     return(
 
         <> 
-        <div>
-        <h1>Candidate</h1>
-        </div>
+       <h1>Hello Candidate</h1>
         </>
-
     );
-
 }
 
 export default Admin;
