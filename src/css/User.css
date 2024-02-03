@@ -7,9 +7,9 @@
     flex-direction: column;
     width: 600px;   
     margin: auto;
-    margin-top: 200px;
+    margin-top: 10px;
     background: #fff;
-    padding-bottom: 30px;
+    padding-bottom: 1px;
 }
 .header{
     display: flex;
@@ -27,7 +27,7 @@
 .underline{
     width: 61px;
     height: 6px;
-    background: #3c009d;
+    background: #7d53c1;
     border-radius: 9px;
 }
 .inputs{
