@@ -7,8 +7,8 @@ function Candidate() {
 
         <div className='container1'>
             <div className='header'>
-                <div className='text'>Sign Up</div>
-                <div className='underline' ></div>
+                <div className='text'><b>Register</b></div>
+               
             </div>
             <div className='Inputs'>
                 <div className='Input'>
@@ -38,7 +38,9 @@ function Candidate() {
 
                 <div className='Input'>
                     <input id="ip" type='password' name='password' placeholder='Re-Enter Password' />
-                        <label className='gender'>
+                    <input id="ip" type='password' name='password' placeholder='Re-Enter Password' />
+                    
+                    <label className='gender'>
                             Gender 
                         <select>
                             <option value="" disabled>Select your gender</option>
@@ -47,12 +49,15 @@ function Candidate() {
                             <option value="other">Other</option>
                         </select>
                         </label>
-                </div>
+                    
+                         
+               
+                 </div>
             </div>
 
             <div className='btnclass'>
-                <button className='btn'>Submit</button>
-                <button className='btn'>Login</button>
+                <button className='btn' id='sub'>Submit</button>
+                <button className='btn' id='log'>Login</button>
             </div>
           </div>
     );
