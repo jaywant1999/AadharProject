@@ -97,4 +97,6 @@
     border-radius: 6px;
 }
 
-
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
