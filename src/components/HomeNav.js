@@ -54,6 +54,13 @@ class HomeNav extends Component{
                         User 
                     </a>
                 </li>
+
+                <li>
+                    <a className="links" href="/Help">
+                        <i class="fa-solid fa-help-line"></i>
+                        Help
+                    </a>
+                </li>
                 
                 </div>
             </ul>
