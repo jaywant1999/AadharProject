@@ -1,6 +1,6 @@
 .NavbarItems{
     background:linear-gradient(
-        to right, rgb(47, 0, 78),rgb(225, 12, 225) 
+        to right, rgb(0, 0, 0),rgb(114, 101, 1) 
     );
     display: flex;
     justify-content: space-between;
@@ -74,7 +74,7 @@
     .NavbarItems{
         z-index: 99;
         background:linear-gradient(
-            to right, rgb(47, 0, 78),rgb(225, 12, 225) 
+            to right, rgb(47, 0, 78),rgb(12, 225, 62) 
         );
         width:100%;
         height: 100px;
