@@ -12,7 +12,7 @@ function Candidate() {
             </div>
             <div className='Inputs'>
                 <div className='Input'>
-                    <input id="ip" type='text' inputMode='numeric' placeholder='Aadhar Number' />
+                    <input id="ip" type='number' inputMode='numeric' placeholder='Aadhar Number' />
                     <input id="ip" type='text' inputMode='text' placeholder='First Name' />
                     <input id="ip" type='text' inputMode='text' placeholder='Middle Name' />
                 </div>
@@ -37,19 +37,17 @@ function Candidate() {
                 </div>
 
                 <div className='Input'>
-                         <input id="ip" type='password' name='password' placeholder='Re-Enter Password' />
-                     
-                         <label className='gender'>
-                            Select your gender :
-                            <select >
+                    <input id="ip" type='password' name='password' placeholder='Re-Enter Password' />
+                        <label className='gender'>
+                            Gender 
+                        <select>
+                            <option value="" disabled>Select your gender</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                             <option value="other">Other</option>
-                            </select>
+                        </select>
                         </label>
-                         
-               
-                 </div>
+                </div>
             </div>
 
             <div className='btnclass'>
