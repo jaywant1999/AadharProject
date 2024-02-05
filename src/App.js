@@ -7,17 +7,20 @@ import About from "./Pages/About.js";
 import Admin from "./Pages/Admin.js";
 import Candidate from "./Pages/Candidate.js";
 import User from "./Pages/User.js";
+import Help from "./Pages/HelpPage.js";
+import Helpinfo from "./Pages/Helpinfo1.js";
+
  
 
  export default function App(){
     return(
         <>
        <div>
-  {/* hy */}
+ 
          <div className="nav">
             <HomeNav/>
         </div>
-        {/* sanket  */}
+       
     
         <div className="App">
             <BrowserRouter>
@@ -27,6 +30,10 @@ import User from "./Pages/User.js";
                     <Route path="/Admin" element={<Admin/>}/>
                     <Route path="/Candidate" element={<Candidate/>}/>
                     <Route path="/User" element={<User/>}/>
+                    <Route path="/Help" element={<Help/>}/>
+                    <Route path="/HelpInfo" element={<Helpinfo/>}/>
+                    
+
                 </Routes>
             </BrowserRouter>
         </div>
@@ -36,6 +43,6 @@ import User from "./Pages/User.js";
 
         
         </>
-    )
- }
+    );
+ };
 
