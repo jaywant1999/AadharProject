@@ -1,15 +1,15 @@
 import { Component } from "react";
 import "../css/HomeNav.css";
 
-class HomeNav extends Component{
+const Homenav=()=>{
     state = {clicked: false};
 
     handleclick = ()=>{
         this.setState({clicked : !this.state.clicked})
     }
 
-    render(){
-        return (
+    
+        return(
            <nav className="NavbarItems">
    
             <div className="logo"><h1 className="Navbar-logo">मेरा देश ,<br/> मेरा चुनाव ...</h1></div>
@@ -66,8 +66,8 @@ class HomeNav extends Component{
             </ul>
         
            </nav> 
-        )
+        );
     }
-}
+ 
 
 export default HomeNav;
