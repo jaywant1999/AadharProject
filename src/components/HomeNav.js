@@ -1,24 +1,21 @@
-import { Component } from "react";
+ 
 import "../css/HomeNav.css";
+ 
 
-class HomeNav extends Component{
-    state = {clicked: false};
+ function Homenav(){ 
+     
 
-    handleclick = ()=>{
-        this.setState({clicked : !this.state.clicked})
-    }
-
-    render(){
-        return (
+    
+        return(
            <nav className="NavbarItems">
    
             <div className="logo"><h1 className="Navbar-logo">मेरा देश ,<br/> मेरा चुनाव ...</h1></div>
-            <div className="menu-icon" onClick={this.handleclick}>
+            <div className="menu-icon" onClick= "">
 
-            <i className={this.state.clicked ? "fas fa-times"   :"fas fa-bars"}></i>
+            <i className= ""></i>
             </div> 
             
-            <ul className={this.state.clicked ? "menu active" : "menu"}>
+            <ul className= "">
                 <div className="link-items">
                 <li >
                     <a className="links" href="/">
@@ -66,8 +63,8 @@ class HomeNav extends Component{
             </ul>
         
            </nav> 
-        )
+        );
     }
-}
+ 
 
-export default HomeNav;
+export default Homenav;

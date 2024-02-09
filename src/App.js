@@ -11,7 +11,8 @@ import Help from "./Pages/HelpPage.js";
 import AdminHome from "./Pages/Admin/AdminHome.js";
 import UserHomePage from "./Pages/User/UserHomePage.js";
 import CandidateHomePage from "./Pages/Candidate/CandidateHomePage.js";
-
+import UserOtp from "./Pages/User/UserOtp.js"
+import CandidateOtp from "./Pages/Candidate/CandidateOtp.js"
  
 
  export default function App(){
@@ -34,7 +35,9 @@ import CandidateHomePage from "./Pages/Candidate/CandidateHomePage.js";
                     <Route path="/User" element={<User/>}/>
                     <Route path="/Help" element={<Help/>}/>
                     <Route path="/AdminHome" element={<AdminHome/>}/>
+                    <Route path="/UserOtp" element={<UserOtp/>}/>
                     <Route path="/UserHomePage" element={<UserHomePage/>}/>
+                    <Route path="/CandidateOtp" element={<CandidateOtp/>}/>
                     <Route path="/CandidateHomePage" element={<CandidateHomePage/>}/>
 
                 </Routes>

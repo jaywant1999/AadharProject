@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 
 const User=()=>{
   const navigate = useNavigate();
-  const goToUserHome=()=>{
-    alert('It will redirect to the user home page'); // Show an alert when the button is clicked
-    navigate('/UserHomePage'); // Navigate to the user home page
+  const goToUserOtp=()=>{
+    alert('It will redirect to the user otp page'); // Show an alert when the button is clicked
+    navigate('/UserOtp'); // Navigate to the user otp page
   }
 
 
@@ -34,7 +34,7 @@ const User=()=>{
         </div>
 
         <div>
-          <button onClick={goToUserHome}>Submit</button>
+          <button onClick={goToUserOtp}>Submit</button>
         </div>
         
       </div>
