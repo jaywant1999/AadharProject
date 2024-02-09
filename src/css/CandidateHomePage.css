@@ -1,0 +1,32 @@
+.candidate-home-page {
+    text-align: center;
+  }
+  
+  .menu {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px; /* Increased top margin for more space */
+  }
+  
+  .menu-item {
+    margin: 0 30px; /* Increased space between menu items */
+  }
+  
+  .menu-item a {
+    display: block;
+    padding: 20px 40px; /* Increased padding for larger boxes */
+    text-decoration: none;
+    color: #333;
+    font-size: 18px; /* Increased font size */
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    border: 2px solid #4c00b4; /* Increased border thickness */
+    border-radius: 8px; /* Increased border radius for rounded corners */
+  }
+  
+  .menu-item a:hover {
+    color: #fff; /* Change text color on hover */
+    background-color: #4c00b4; /* Change background color on hover */
+    border-color: #4c00b4; /* Change border color on hover */
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); /* Add larger shadow effect on hover */
+  }
+  

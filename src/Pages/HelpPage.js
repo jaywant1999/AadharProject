@@ -1,46 +1,67 @@
-
-
-// HelpPage.js
-
 import '../css/HelpPage.css';
-import './Helpinfo1.js';
-import './Helpinfo2.js';
-import './Helpinfo3.js';
-
+import { useState } from 'react';
 
 const HelpPage = () => {
+  const [selectedItem, setSelectedItem] = useState(null);
+    
+  // Sample help data
+  const helpData = {
+  userHelp: [
+      "How to register as a user?",
+      "How to log in?",
+      "How to update profile information?",
+  ],
+  adminHelp: [
+      "How to access admin dashboard?",
+      "How to validate candidates?",
+      "How to view statistics?",
+  ],
+  candidateHelp: [
+      "How to register as a candidate?",
+      "How to set password after admin approval?",
+      "How to update candidate profile?",
+  ]
+  };
+
+// Function to handle click on help item
+const handleItemClick = (item) => {
+setSelectedItem(item);
+};
   return (
-    <div>
-        <div className="container">
-        <h2>Welcome to the Aadhar-based E-voting system help page</h2>
-        <p>If you have any questions or concerns, please refer to the information below:</p>
+    <div className="help-page">
+        <h1>Help Page</h1>
+        <div className="help-container">
+          <div className="help-section">
+            <h2>User Help</h2>
+            <ul>
+              {helpData.userHelp.map((item, index) => (
+                <li key={index} onClick={() => handleItemClick(item)}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="help-section">
+            <h2>Admin Help</h2>
+            <ul>
+              {helpData.adminHelp.map((item, index) => (
+                <li key={index} onClick={() => handleItemClick(item)}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="help-section">
+            <h2>Candidate Help</h2>
+            <ul>
+              {helpData.candidateHelp.map((item, index) => (
+                <li key={index} onClick={() => handleItemClick(item)}>{item}</li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <div> 
-          <a href="/Helpinfo1">
-            <div className="help-section" id='hs1'>
-              <h2>Getting Started</h2>
-              <p>Follow these steps to start using the E-voting system...</p>
-            </div>
-          </a>
-
-          <a href="/Helpinfo2">
-              <div className="help-section" id='hs2'>
-                <h2>Aadhar Authentication</h2>
-                <p>Learn how to authenticate your Aadhar for a secure voting experience...</p>
-              </div>
-          </a>
-
-          <a href="Helpinfo3">
-            <div className="help-section" id='hs3'>
-              <h2>Contact Support</h2>
-              <p>If you encounter any issues or have questions, please contact our support team...</p>
-              <p>Email: support@example.com</p>
-              <p>Phone: 123-456-7890</p>
-            </div>
-          </a>
-         
+        <div className="selected-item">
+          <h2>Here is guide for you</h2>
+          <p>{selectedItem}</p>
         </div>
-    </div>
+      </div>
+    
   );
 };
 

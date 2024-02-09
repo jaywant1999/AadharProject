@@ -8,7 +8,9 @@ import Admin from "./Pages/Admin.js";
 import Candidate from "./Pages/Candidate.js";
 import User from "./Pages/User.js";
 import Help from "./Pages/HelpPage.js";
-import Helpinfo from "./Pages/Helpinfo1.js";
+import AdminHome from "./Pages/Admin/AdminHome.js";
+import UserHomePage from "./Pages/User/UserHomePage.js";
+import CandidateHomePage from "./Pages/Candidate/CandidateHomePage.js";
 
  
 
@@ -31,8 +33,9 @@ import Helpinfo from "./Pages/Helpinfo1.js";
                     <Route path="/Candidate" element={<Candidate/>}/>
                     <Route path="/User" element={<User/>}/>
                     <Route path="/Help" element={<Help/>}/>
-                    <Route path="/HelpInfo" element={<Helpinfo/>}/>
-                    
+                    <Route path="/AdminHome" element={<AdminHome/>}/>
+                    <Route path="/UserHomePage" element={<UserHomePage/>}/>
+                    <Route path="/CandidateHomePage" element={<CandidateHomePage/>}/>
 
                 </Routes>
             </BrowserRouter>

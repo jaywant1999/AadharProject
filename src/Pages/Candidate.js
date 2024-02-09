@@ -1,7 +1,13 @@
 
 import '../css/Candidate.css';
+import { useNavigate } from 'react-router-dom';
 
 function Candidate() {
+    const navigate = useNavigate();
+    const goToCandidateHome=()=>{
+        alert('It will redirect to the candidate home page'); // Show an alert when the button is clicked
+        navigate('/CandidateHomePage'); // Navigate to the user home page
+    }
 
     return (
 
@@ -56,7 +62,7 @@ function Candidate() {
             </div>
 
             <div className='btnclass'>
-                <button className='btn' id='sub'>Submit</button>
+                <button className='btn' id='sub' onClick={goToCandidateHome}>Submit</button>
                 <button className='btn' id='log'>Login</button>
             </div>
           </div>

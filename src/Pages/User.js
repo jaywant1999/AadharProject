@@ -1,7 +1,13 @@
 import React, { useState } from 'react'
 import '../css/User.css'
+import { useNavigate } from 'react-router-dom';
 
 const User=()=>{
+  const navigate = useNavigate();
+  const goToUserHome=()=>{
+    alert('It will redirect to the user home page'); // Show an alert when the button is clicked
+    navigate('/UserHomePage'); // Navigate to the user home page
+  }
 
 
     const [action,setAction] = useState("Signup")
@@ -25,6 +31,10 @@ const User=()=>{
         <div className="input">
           {/* <img src={user_icon} alt=""/> */}
           <input type="text" placeholder='Enter your Aadhar number here'/>
+        </div>
+
+        <div>
+          <button onClick={goToUserHome}>Submit</button>
         </div>
         
       </div>
