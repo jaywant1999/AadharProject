@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ 
 import  React, {useState, useRef} from 'react'
 import "../../css/Otp.css"
 import { useNavigate } from 'react-router-dom';
@@ -103,8 +103,8 @@ const OtpPage =()=>{
    );
 };
 
-export default OtpPage ;
-=======
+ 
+
 import React, { useState, useRef } from "react";
 import "../../css/Otp.css";
 import { useNavigate } from "react-router-dom";
@@ -202,5 +202,5 @@ const UserOtp = () => {
   );
 };
 
-export default UserOtp;
->>>>>>> 67f3b391810218610d07f322e4cd8a91b4fff099
+export default {UserOtp,OtpPage};
+ 
