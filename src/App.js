@@ -7,11 +7,13 @@ import About from "./Pages/About.js";
 import Admin from "./Pages/Admin.js";
 import Candidate from "./Pages/Candidate.js";
 import User from "./Pages/User.js";
+// import { User } from "./Pages/User.js";
 import Help from "./Pages/HelpPage.js";
 import AdminHome from "./Pages/Admin/AdminHome.js";
 import UserHomePage from "./Pages/User/UserHomePage.js";
 import CandidateHomePage from "./Pages/Candidate/CandidateHomePage.js";
-
+import UserOtp from "./Pages/User/UserOtp.js";
+import SetUserPassword from "./Pages/User/SetUserPassword.js";
  
 
  export default function App(){
@@ -36,6 +38,8 @@ import CandidateHomePage from "./Pages/Candidate/CandidateHomePage.js";
                     <Route path="/AdminHome" element={<AdminHome/>}/>
                     <Route path="/UserHomePage" element={<UserHomePage/>}/>
                     <Route path="/CandidateHomePage" element={<CandidateHomePage/>}/>
+                    <Route path="/UserOtp" element={<UserOtp/>}/>
+                    <Route path="/SetUserPassword" element={<SetUserPassword/>}/>
 
                 </Routes>
             </BrowserRouter>
