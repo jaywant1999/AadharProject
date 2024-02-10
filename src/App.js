@@ -7,12 +7,18 @@ import About from "./Pages/About.js";
 import Admin from "./Pages/Admin.js";
 import Candidate from "./Pages/Candidate.js";
 import User from "./Pages/User.js";
+// import { User } from "./Pages/User.js";
 import Help from "./Pages/HelpPage.js";
 import AdminHome from "./Pages/Admin/AdminHome.js";
 import UserHomePage from "./Pages/User/UserHomePage.js";
 import CandidateHomePage from "./Pages/Candidate/CandidateHomePage.js";
+<<<<<<< HEAD
 import UserOtp from "./Pages/User/UserOtp.js"
 import CandidateOtp from "./Pages/Candidate/CandidateOtp.js"
+=======
+import UserOtp from "./Pages/User/UserOtp.js";
+import SetUserPassword from "./Pages/User/SetUserPassword.js";
+>>>>>>> 67f3b391810218610d07f322e4cd8a91b4fff099
  
 
  export default function App(){
@@ -39,6 +45,8 @@ import CandidateOtp from "./Pages/Candidate/CandidateOtp.js"
                     <Route path="/UserHomePage" element={<UserHomePage/>}/>
                     <Route path="/CandidateOtp" element={<CandidateOtp/>}/>
                     <Route path="/CandidateHomePage" element={<CandidateHomePage/>}/>
+                    <Route path="/UserOtp" element={<UserOtp/>}/>
+                    <Route path="/SetUserPassword" element={<SetUserPassword/>}/>
 
                 </Routes>
             </BrowserRouter>

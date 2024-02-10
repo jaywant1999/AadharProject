@@ -1,4 +1,3 @@
- 
 import { useState } from "react";
 import "../css/HomeNav.css";
 import voter from "../images/votehand.png"
@@ -18,9 +17,8 @@ import voter from "../images/votehand.png"
             <span></span>
             <span></span>
             </div> 
-
             <ul className={menuOpen ? "open" :" "} >
-                <li >
+                <li>
                     <a className="links" href="/">
                  
                         <i className="fa-solid fa-house" />
@@ -62,8 +60,6 @@ import voter from "../images/votehand.png"
                         Help
                     </a>
                 </li>
-                
-                 
             </ul>
         
            </nav> 
