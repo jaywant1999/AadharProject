@@ -1,25 +1,29 @@
  
+import { useState } from "react";
 import "../css/HomeNav.css";
+import voter from "../images/votehand.png"
  
 
  function Homenav(){ 
      
-
+    const [menuOpen, setMenuOpen] = useState(false);
     
         return(
            <nav className="NavbarItems">
-   
-            <div className="logo"><h1 className="Navbar-logo">मेरा देश ,<br/> मेरा चुनाव ...</h1></div>
-            <div className="menu-icon" onClick= "">
-
-            <i className= ""></i>
+            <div className="logocontent"><img id="img1" src={voter}/><h1 className="Navbar-logo">मेरा देश, <br/>मेरा चुनाव ...</h1></div>
+            <div className="menu" onClick={()=>{
+                setMenuOpen(!menuOpen)
+            }}>
+            <span></span>
+            <span></span>
+            <span></span>
             </div> 
-            
-            <ul className= "">
-                <div className="link-items">
+
+            <ul className={menuOpen ? "open" :" "} >
                 <li >
                     <a className="links" href="/">
-                        <i className="fa-solid fa-house"/>
+                 
+                        <i className="fa-solid fa-house" />
                             Home 
                     </a>
                 </li>
@@ -54,12 +58,12 @@ import "../css/HomeNav.css";
 
                 <li>
                     <a className="links" href="/Help">
-                        <i class="fa-solid fa-help-line"></i>
+                    <i class="fa-solid fa-question"></i>
                         Help
                     </a>
                 </li>
                 
-                </div>
+                 
             </ul>
         
            </nav> 
