@@ -43,25 +43,28 @@ const { aadhartable } = require("./TableAadhar");
 //   } catch (error) {
 //     // handle any errors that occur during the process
 //     res.status(500).json({ error: "An error occurred while saving the data." });
-//   } 
+//   }
 // };
 
 const postCredential = async (req, res) => {
   try {
-   const { AadhaarNumber, password } = req.body;
+    const { AadhaarNumber, password } = req.body;
     // Hash the password using bcrypt
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Save the hashed password to the database
-    const data = { "AadhaarNumber":AadhaarNumber, "password": hashedPassword };
+    const data = { AadhaarNumber: AadhaarNumber, password: hashedPassword };
     const temp = await logintable.create(data); // assuming logintable is a model that has a create method
 
     res.json(temp); // return the saved data as a response
   } catch (error) {
-    console.log("Eroor : ",error.message);
+    console.log("Eroor : ", error.message);
     // handle any errors that occur during the process
-    res.status(500).json({ error: "An error occurred while saving the data. or Your Aadhar number is not Valid!!!" });
+    res.status(500).json({
+      error:
+        "An error occurred while saving the data. or Your Aadhar number is not Valid!!!",
+    });
   }
 };
 
@@ -138,32 +141,24 @@ const getAadharData = async (req, res) => {
 //   }
 // };
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
 const verifyCredential = async (req, res) => {
   const { AadhaarNumber, password } = req.body;
 
-  //checking empty fields
+  // Checking empty fields
   if (!AadhaarNumber || !password) {
     return res.status(400).json({ message: "Please enter all the details" });
   }
 
-  //validating user credentials
+  // Retrieving user data from the local server
   let userData = await logintable.findByPk(AadhaarNumber);
-  if(!userData){
-    let userData = await admtbl.findByPk(AadhaarNumber);
-    if(!userData){
-      return res.status(401).json({ message: "Invalid Credentials!" });
-    }else{
-      const match = await bcrypt.compare(password, userData.password);
-      if (!match) {
-        return res.status(401).json({ message: "Invalid Password!" });
-      } else {
-        return res.status(200).json({ message: "Valid User!" });
-      }
-    } 
-  }
-  else if (!userData) {
+
+  if (!userData) {
+    return res.status(404).json({ message: "Data does not exist" });
   } else {
-    const match = await bcrypt.compare(password, userData.password);
+    const match = await bcrypt.compare(password, userData.password); //Returns boolean value  whether it matches or not
+    // Comparing hashed password with entered password using bcrypt compare method
     if (!match) {
       return res.status(401).json({ message: "Invalid Password!" });
     } else {
@@ -171,7 +166,7 @@ const verifyCredential = async (req, res) => {
     }
   }
 };
-
+router.post("/verify", verifyCredential); ///verify the credential with password {http://localhost:1234/verify}
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // const updateCredential = async (req, res) =>{
@@ -244,8 +239,8 @@ const verifyCredential = async (req, res) => {
 
 router.post("/add", postCredential);
 // router.post("/addadm", postCredentialadm);
- //Adds new credential {http://localhost:1234/add}
-router.post("/verify", verifyCredential); ///verify the credential with password {http://localhost:1234/verify}
+//Adds new credential {http://localhost:1234/add}
+
 // router.put(":/id", updateCredential); //Updates existing credential by Id and otp verification
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -267,7 +262,7 @@ router.post("/verify", verifyCredential); ///verify the credential with password
 // };
 
 // router.get("/", getAllData);
- router.get("/:reqid", getUserCredential); // to fetch user credential
+router.get("/:reqid", getUserCredential); // to fetch user credential
 router.post("/aadhar/:reqid", getAadharData); // to fetch aadhar data
 
 module.exports = router;

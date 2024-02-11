@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Axios from 'axios'
-
+import Axios from "axios";
 
 const SetUserPassword = () => {
   const navigate = useNavigate();
@@ -17,20 +16,17 @@ const SetUserPassword = () => {
     e.preventDefault();
     const userData = {
       AadhaarNumber: aadhar,
-      password: password
+      password: password,
     };
 
     try {
-      const response = await Axios.post(
-        `http://127.0.0.1:1234/add/`,
-        userData
-      );
-      //  console.log(response.data.message);
+      const response = await Axios.post(`http://127.0.0.1:1234/add/`, userData);
+      console.log(response.data.message);
       // setIsValid(response.data.message);
       alert("It will redirect to the User Home page"); // Show an alert when the button is clicked
-      navigate("./UserHomePage.js"); // Navigate to the admin home page
+      navigate("./UserHomePage"); // Navigate to the admin home page
     } catch (e) {
-         console.log(e.response.data.error);
+      console.log(e.response.data.error);
       alert(e.response.data.error);
     }
   };

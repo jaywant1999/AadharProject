@@ -1,6 +1,5 @@
- 
 import "./App.css";
-import { BrowserRouter, Route,Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home.js";
 import HomeNav from "./components/HomeNav.js";
 import About from "./Pages/About.js";
@@ -12,51 +11,50 @@ import Help from "./Pages/HelpPage.js";
 import AdminHome from "./Pages/Admin/AdminHome.js";
 import UserHomePage from "./Pages/User/UserHomePage.js";
 import CandidateHomePage from "./Pages/Candidate/CandidateHomePage.js";
- 
-import UserOtp from "./Pages/User/UserOtp.js"
-import CandidateOtp from "./Pages/Candidate/CandidateOtp.js"
- 
+
+import CandidateOtp from "./Pages/Candidate/CandidateOtp.js";
+
 import UserOtp from "./Pages/User/UserOtp.js";
 import SetUserPassword from "./Pages/User/SetUserPassword.js";
- 
- 
+import UserLogin from "./Pages/User/UserLogin.js";
+import CandidateLoginPage from "./Pages/Candidate/CandidateLoginPage";
 
- export default function App(){
-    return(
-        <>
-       <div>
- 
-         <div className="nav">
-            <HomeNav/>
+export default function App() {
+  return (
+    <>
+      <div>
+        <div className="nav">
+          <HomeNav />
         </div>
-       
-    
+
         <div className="App">
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/About" element={<About/>}/>
-                    <Route path="/Admin" element={<Admin/>}/>
-                    <Route path="/Candidate" element={<Candidate/>}/>
-                    <Route path="/User" element={<User/>}/>
-                    <Route path="/Help" element={<Help/>}/>
-                    <Route path="/AdminHome" element={<AdminHome/>}/>
-                    <Route path="/UserOtp" element={<UserOtp/>}/>
-                    <Route path="/UserHomePage" element={<UserHomePage/>}/>
-                    <Route path="/CandidateOtp" element={<CandidateOtp/>}/>
-                    <Route path="/CandidateHomePage" element={<CandidateHomePage/>}/>
-                    <Route path="/UserOtp" element={<UserOtp/>}/>
-                    <Route path="/SetUserPassword" element={<SetUserPassword/>}/>
-
-                </Routes>
-            </BrowserRouter>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/About" element={<About />} />
+              <Route path="/Admin" element={<Admin />} />
+              <Route path="/Candidate" element={<Candidate />} />
+              <Route path="/User" element={<User />} />
+              <Route path="/Help" element={<Help />} />
+              <Route path="/AdminHome" element={<AdminHome />} />
+              <Route path="/UserOtp" element={<UserOtp />} />
+              <Route path="/UserHomePage" element={<UserHomePage />} />
+              <Route path="/CandidateOtp" element={<CandidateOtp />} />
+              <Route
+                path="/CandidateHomePage"
+                element={<CandidateHomePage />}
+              />
+              <Route path="/UserOtp" element={<UserOtp />} />
+              <Route path="/SetUserPassword" element={<SetUserPassword />} />
+              <Route path="/UserLogin" element={<UserLogin />} />
+              <Route
+                path="/CandidateLoginPage"
+                element={<CandidateLoginPage />}
+              />
+            </Routes>
+          </BrowserRouter>
         </div>
-      
-        </div>
-        
-
-        
-        </>
-    );
- };
-
+      </div>
+    </>
+  );
+}
