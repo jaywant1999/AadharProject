@@ -6,6 +6,7 @@ const CandidateLoginPage = () => {
     <div>
       <div className="form-container">
         <form>
+          <h2>Candidate Login</h2>
           <label>
             Aadhar Number:
             <input

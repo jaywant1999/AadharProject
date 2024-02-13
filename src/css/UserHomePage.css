@@ -1,84 +1,45 @@
-.user-home-page {
-    text-align: center;
-    padding: 0px;
-    margin: 0px;
-    padding-bottom: 100px;
-  }
-  
-  .menu-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 50px; /* Increased top margin for more space */
-    /* box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); */
-  }
-  
-  .menu-item {
-    margin: 0 30px; /* Increased space between menu items */
-    
-  }
+.ht {
+  position: relative;
+}
 
-  .anchor{
-    width: 400px;
-    height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0px 8px 15px 0px rgb(83, 81, 81);
-    border-color: white;
-  }
-  
-  #icon{
-    font-size: 60px;
-  }
-  .menu-item a {
-    display: block;
-    padding: 20px 40px; /* Increased padding for larger boxes */
-    text-decoration: none;
-    color: #333;
-    font-size: 18px; /* Increased font size */
-    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Added transition for transform */
-    border: 2px solid #ffffff; /* Increased border thickness */
-    border-radius: 8px; /* Increased border radius for rounded corners */
-    position: relative; /* Added relative positioning for the before pseudo-element */
-  }
-  
-  .menu-item a::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.1); /* Added semi-transparent background */
-    border-radius: 8px; /* Inherit border radius */
-    opacity: 0;
-    transition: opacity 0.3s ease; /* Smooth transition for opacity */
-  }
-  
-  .menu-item a:hover::before {
-    opacity: 1; /* Show the overlay on hover */
-  }
-  
-  .menu-item a:hover {
-    color: #fff; /* Change text color on hover */
-    background-color: #4c00b4; /* Change background color on hover */
-    border-color: #4c00b4; /* Change border color on hover */
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); /* Add larger shadow effect on hover */
-    transform: translateY(-3px); /* Lift the button slightly on hover */
-  }
+.sidebar {
+  position: absolute;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 87%;
+  background-color: rgb(14, 22, 95);
+  color: white;
+  transition: left 0.3s ease;
+  border-radius: 10px;
+  margin-top: 126px;
+}
 
-  .profile{
-    display: flex;
-    justify-content: center;
-    width:100%;
-    height: 200px;
-    background: #fffcfc;
-    margin :0px;
-    margin-top: 10px;
-    align-items: center;
+.sidebar.open {
+  left: 0;
+}
 
-    padding: 0px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); /* Add larger shadow effect on hover */
-    border-radius: 25px;
-  }
-  
+.sidebar h2 {
+  padding: 20px;
+  margin: 0; /* Removed margin-top: 0; */
+}
+
+.sidebar ul {
+  display: block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 10px;
+}
+
+.sidebar li {
+  display:block; /* Ensure <li> elements display as blocks */
+  padding: 30px 20px;
+  cursor: pointer;
+  font-size: large;
+}
+
+.sidebar li:hover {
+  background-color: #615d5d;
+}
+   

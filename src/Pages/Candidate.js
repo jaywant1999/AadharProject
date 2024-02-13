@@ -1,84 +1,70 @@
+import React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Axios from "axios";
+import "../css/Candidate.css";
 
-function Candidate() {
+const Candidate = () => {
   const navigate = useNavigate();
-  const goToCandidateHome = () => {
-    alert("It will redirect to the candidate home page"); // Show an alert when the button is clicked
-    navigate("/CandidateHomePage"); // Navigate to the user home page
-  };
+  const [aadharID, setAadharID] = useState("");
 
+  const getAadharInfo = async (e) => {
+    e.preventDefault();
+    try {
+      console.log(`${aadharID}`);
+
+      const isCandiExist = await Axios.get(
+        `http://127.0.0.1:1234/candidates/${aadharID}`
+      );
+      console.log(isCandiExist.data);
+
+      if (isCandiExist.data) {
+        const response = await Axios.post(
+          `http://127.0.0.1:1234/fromaadhartable/${aadharID}` //this will fetch data from aadhar table
+        );
+        sessionStorage.setItem("candidateaadhar", response.data.AadhaarNumber); // Changing aadhar to candidateaadhar
+        setAadharID(response.data);
+        console.log(response.data);
+        alert("It will redirect to the Candidate Otp page!");
+        navigate("/CandidateOtp");
+      } else {
+        alert("This Aadhaar number is already regestered!");
+        navigate("/Candidate");
+      }
+    } catch (e) {
+      // console.log(e);
+      alert("Aadhar Number Not Valid!!!");
+    }
+  };
   return (
     <>
-      <div className=" form-container">
-        {" "}
-        {/* Wrap the form in a div with class 'form-box' */}
-        <form>
-          <label>
-            First Name:
+      <div className="container">
+        <h2>Candidate</h2>
+        <form onSubmit={getAadharInfo}>
+          <div className="form-group">
             <input
               type="text"
-              name="firstName"
-              // value={formData.firstName}
-              // onChange={handleChange}
+              id="aadharNumber"
+              name="aadharNumber"
+              placeholder="Enter Aadhar Number"
+              onChange={(e) => {
+                setAadharID(e.target.value);
+              }}
+              required
             />
-          </label>
-          <br />
-          <label>
-            Last Name:
-            <input
-              type="text"
-              name="lastName"
-              // value={formData.lastName}
-              // onChange={handleChange}
-            />
-          </label>
-          <br />
-          <label>
-            Gender:
-            <input
-              type="text"
-              name="gender"
-              // value={formData.gender}
-              // onChange={handleChange}
-            />
-          </label>
-          <br />
-          <label>
-            Party Name:
-            <input
-              type="text"
-              name="partyName"
-              // value={formData.partyName}
-              // onChange={handleChange}
-            />
-          </label>
-          <br />
-          <label>
-            Upload Party Proof:
-            <input
-              type="file"
-              name="partyProof"
-              // onChange={handleFileChange}
-            />
-          </label>
-          <br />
-          <label>
-            Add Address:
-            <input
-              type="file"
-              name="addressProof"
-              // onChange={handleFileChange}
-            />
-          </label>
-          <br />
-          <p>
-            Already registered?<a href="/CandidateLoginPage">Login Here</a>
-          </p>
-          <button type="submit">Submit</button>
+          </div>
+          <div className="form-group">
+            <button type="submit">Sign Up</button>
+          </div>
+          <div className="form-group already-registered">
+            <p>
+              Already Registered? <a href="/CandidateLoginPage">Login Here</a>
+            </p>
+          </div>
         </form>
       </div>
     </>
   );
-}
+};
 
 export default Candidate;

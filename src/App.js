@@ -6,18 +6,18 @@ import About from "./Pages/About.js";
 import Admin from "./Pages/Admin.js";
 import Candidate from "./Pages/Candidate.js";
 import User from "./Pages/User.js";
-// import { User } from "./Pages/User.js";
 import Help from "./Pages/HelpPage.js";
 import AdminHome from "./Pages/Admin/AdminHome.js";
 import UserHomePage from "./Pages/User/UserHomePage.js";
 import CandidateHomePage from "./Pages/Candidate/CandidateHomePage.js";
-
 import CandidateOtp from "./Pages/Candidate/CandidateOtp.js";
-
 import UserOtp from "./Pages/User/UserOtp.js";
 import SetUserPassword from "./Pages/User/SetUserPassword.js";
 import UserLogin from "./Pages/User/UserLogin.js";
 import CandidateLoginPage from "./Pages/Candidate/CandidateLoginPage";
+import CandidateRegistration from "./Pages/Candidate/CandidateRegistration.js"
+import UserAddElection from "./Pages/User/UserAddElection.js"
+import AdminAddElection from "./Pages/Admin/AdminAddElection.js"
 
 export default function App() {
   return (
@@ -44,9 +44,12 @@ export default function App() {
                 path="/CandidateHomePage"
                 element={<CandidateHomePage />}
               />
+              <Route path="/CandidateRegistration" element={<CandidateRegistration />} />
               <Route path="/UserOtp" element={<UserOtp />} />
               <Route path="/SetUserPassword" element={<SetUserPassword />} />
               <Route path="/UserLogin" element={<UserLogin />} />
+              <Route path="/UserAddElection" element={<UserAddElection />} />
+              <Route path="/AdminAddElection" element={<AdminAddElection />} />
               <Route
                 path="/CandidateLoginPage"
                 element={<CandidateLoginPage />}

@@ -28,7 +28,7 @@ const UserLogin = () => {
 
     try {
       const response = await Axios.post(
-        `http://localhost:1234/verify`,
+        `http://localhost:1234/verifyusercredential`, //This will check if the user is regestered or not
         loginData,
         {
           validateStatus: function (status) {
@@ -40,12 +40,10 @@ const UserLogin = () => {
       if (response.status === 200) {
         alert("Redirecting to UserHomePage");
         navigate("/UserHomePage");
-      } else if (response.status === 404) {
-        alert("User not found OR Invalid password");
-        setLoginData({ AadhaarNumber: "", password: "" });
       } else {
         console.log(response);
-        alert("Something went wrong. Please try again.");
+        alert("User not found");
+        setLoginData({ AadhaarNumber: "", password: "" });
       }
     } catch (error) {
       console.error("Error:", error);

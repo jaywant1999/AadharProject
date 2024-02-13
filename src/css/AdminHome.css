@@ -1,37 +1,47 @@
-.adminhome{
-    display: flex;
-    justify-content: center;
-
+.ht {
+  position: relative;
 }
 
-.admin-home-page {
-    text-align: center;
-  }
-  
-  .menu {
-    display: flex;
-    margin-top: 50px; /* Increased top margin for more space */
-  }
-  
-  .menu-item {
-    margin: 0 30px; /* Increased space between menu items */
-  }
-  
-  .menu-item a {
-    display: block;
-    padding: 20px 40px; /* Increased padding for larger boxes */
-    text-decoration: none;
-    color: #333;
-    font-size: 12px; /* Increased font size */
-    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
-    border: 2px solid #4c00b4; /* Increased border thickness */
-    border-radius: 8px; /* Increased border radius for rounded corners */
-  }
-  
-  .menu-item a:hover {
-    color: #fff; /* Change text color on hover */
-    background-color: #4c00b4; /* Change background color on hover */
-    border-color: #4c00b4; /* Change border color on hover */
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); /* Add larger shadow effect on hover */
-  }
-  
+.sidebar {
+  position: absolute;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 87%;
+  background-color: rgb(14, 22, 95);
+  color: white;
+  transition: left 0.3s ease;
+  border-radius: 60px;
+  margin-top: 126px;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar h2 {
+  padding: 20px;
+  margin: 0; /* Removed margin-top: 0; */
+}
+
+.sidebar ul {
+  display: block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 10px;
+}
+
+.sidebar li {
+  display:block; /* Ensure <li> elements display as blocks */
+  padding: 30px 20px;
+  cursor: pointer;
+  font-size: large;
+}
+
+.sidebar li:hover {
+  background-color: #f7f5fa;
+}
+.admincontent{
+  height: 10px;
+}

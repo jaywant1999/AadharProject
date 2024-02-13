@@ -11,16 +11,26 @@ const User = () => {
     e.preventDefault();
     try {
       console.log(`${aadharID}`);
-      const response = await Axios.post(
-        `http://127.0.0.1:1234/aadhar/${aadharID}`
-      );
-      sessionStorage.setItem("aadhar", response.data.AadhaarNumber);
-      setAadharID(response.data);
-      console.log(response.data);
-      alert("It will redirect to the user Otp page!");
-      navigate("/UserOtp");
+
+      const isUserExist = await Axios.get(`http://127.0.0.1:1234/${aadharID}`); // This api is working
+      console.log("isUserExist.data.isExist : ", isUserExist.data);
+
+      if (isUserExist.data.isExist) {
+        const response = await Axios.post(
+          `http://127.0.0.1:1234/fromaadhartable/${aadharID}` //Working api fetching data from aadhaar table
+        );
+        sessionStorage.setItem("aadhar", response.data.AadhaarNumber);
+        setAadharID(response.data);
+        console.log(response.data);
+        alert("It will redirect to the user Otp page!");
+        navigate("/UserOtp");
+      } else {
+        alert("This Aadhaar number is already regestered!");
+        navigate("/User");
+        //This check is not working
+      }
     } catch (e) {
-      alert("Data Not Found!!!");
+      alert("Aadhar not valid!!!");
     }
   };
 
@@ -55,8 +65,5 @@ const User = () => {
     </>
   );
 };
-
-// export default User;
-// export default getAadharInfo;
 
 export default User;

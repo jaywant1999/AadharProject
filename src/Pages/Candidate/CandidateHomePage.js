@@ -1,25 +1,27 @@
 import React from 'react'
+import { useState } from "react";
+
 
 const CandidateHomePage=()=> {
-  return (
-    <div className="candidate-home-page">
-    <h1>Welcome to Candidate Home Page</h1>
-    <div className="menu">
-      <div className="menu-item">
-        <a href="#profile">Profile</a>
-      </div>
-      <div className="menu-item">
-        <a href="#status">Status</a>
-      </div>
-      <div className="menu-item">
-        <a href="#candidate-help">Candidate Help</a>
-      </div>
-      <div className="menu-item">
-        <a href="#logout">Logout</a>
-      </div>
+  const [isOpen, setIsOpen] = useState(false);
 
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+  return (
+    <div>
+    <button onClick={toggleSidebar}>Toggle Sidebar</button>
+    <div className={`sidebar ${isOpen ? 'open' : ''}`}>
+      <h2>Weclome Candidate</h2>
+      <ul>
+        <li>Candidate Profile</li>
+        <li>Candidate Status</li>
+        <li>Candidate Help</li>
+        <li>Logout</li>
+      </ul>
     </div>
   </div>
+    
   )
 }
 export default CandidateHomePage;
