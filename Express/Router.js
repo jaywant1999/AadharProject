@@ -4,9 +4,9 @@ const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const { aadhartable } = require("./TableAadhar");
 const { candiTable } = require("./TableCandidate");
-const {dummycandiTable} = require("./TableCandiDummy");
+const { dummycandiTable } = require("./TableCandiDummy");
+const { AddElectionTable } = require("./AddElection");
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const getAadharData = async (req, res) => {
@@ -34,10 +34,11 @@ const getUserCredential = async (req, res) => {
   try {
     const id = req.params.reqid;
     const resource = await logintable.findByPk(id);
-   
 
     if (!resource) {
-      return res.status(200).json({ "message": "User is not registered","isExist":true });
+      return res
+        .status(200)
+        .json({ message: "User is not registered", isExist: true });
     }
 
     res.status(200).json(resource);
@@ -131,8 +132,6 @@ const getCandiCredential = async (req, res) => {
 router.get("/candidates/:reqid", getCandiCredential);
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // const postCredentialadm = async (req, res) => {
 //   try {
@@ -154,7 +153,6 @@ router.get("/candidates/:reqid", getCandiCredential);
 // };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 // const updateCredential = async (req, res) =>{
 //     try {
@@ -224,7 +222,6 @@ router.get("/candidates/:reqid", getCandiCredential);
 //   }
 // };
 
-
 // router.post("/addadm", postCredentialadm);
 //Adds new credential {http://localhost:1234/add}
 
@@ -255,7 +252,6 @@ const postCredentialAdmin = async (req, res) => {
 };
 //////////////////////////////////////////////////////////////////////////////////////////
 
-
 router.post("/addCandidate", postCredentialAdmin);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // const getAadharData = async (req, res) =>{
@@ -276,27 +272,45 @@ router.post("/addCandidate", postCredentialAdmin);
 
 // router.get("/", getAllData);
 
-
-const addDummyCandidate = async(req, res)=>{
-  
-  try{
+const addDummyCandidate = async (req, res) => {
+  try {
     const data = req.body;
-  console.log(data);
-  const  newData = await dummycandiTable.create(data);
-  res.json(newData);
-  }
-  catch(e){
+    console.log(data);
+    const newData = await dummycandiTable.create(data);
+    res.json(newData);
+  } catch (e) {
     console.log("Hello");
     console.log(e.message);
   }
-}
+};
 
-router.post("/addDummyCandidate",addDummyCandidate );
+const addElection = async (req, res) => {
+  const data = req.body;
+  console.log(data.electname);
+  console.log(data.electdate);
 
+  try {
+    
+    const response = await AddElectionTable.create(data);
+  res.json(response);
 
+  } catch (error) {
+    console.log(`Error occured`,error);
+  }
+  
+};
 
+const getelectionlist = async (req, res) => {
+  try {
+    const result = await AddElectionTable.findAll({});
+    res.json(result);
+  } catch (error) {
+    console.log("Error occured reffer Router.js", error);
+  }
+};
 
-
-
+router.post("/addDummyCandidate", addDummyCandidate);
+router.post("/addelection", addElection);
+router.get("/get/election/list", getelectionlist);
 
 module.exports = router;

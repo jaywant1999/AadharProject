@@ -2,29 +2,46 @@ import React from 'react'
 import { useState } from 'react';
 import '../../css/AdminAddElection.css'
 import '../Admin/AdminHome.js'
+import Axios from  'axios';
 
 const AdminAddElection=()=> {
      // State variables to store election details
   const [electionName, setElectionName] = useState('');
-  const [electionDate, setElectionDate] = useState('');
+  const [electionDate, setElectionDate] = useState(Date);
 
   // Function to handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
 
     // Construct the election object
-    const election = {
-      name: electionName,
-      date: electionDate
-    };
+    // const election = {
+    //   electname: electionName,
+    //   electdate: electionDate
+    // };
 
+    const election = {
+      electname: electionName,
+      electdate: electionDate
+    };
+    console.log(election);
+// console.log(election);//Getting data in  console  
     // Send the election data to the backend for further processing
     // You can implement this part using Axios or fetch
-    console.log('Election details:', election);
+
 
     // Reset the form fields after submission
-    setElectionName('');
-    setElectionDate('');
+    // setElectionName('');
+    // setElectionDate('');
+
+    try {
+      console.log(election);
+      const response = await Axios.post(`http://127.0.0.1:1234/addelection/`,election);
+      console.log(response);
+    } catch (error) {
+      
+    }
+    
+
   };
 
 
