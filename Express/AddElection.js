@@ -15,17 +15,7 @@ const AddElectionTable = Sequelize.define(
     },
     electdate: {
       type: DATE,
-      // get() {
-      //   // Convert the date to a string without timezone conversion
-      //   return moment(this.getDataValue('electdate')).format('MM-DD-YYYY');
-      // },
-      // set(val) {
-      //   // Parse the date string and set it without timezone conversion
-      //   const date = moment(val, 'MM-DD-YYYY');
-      //   if (date.isValid()) {
-      //     this.setDataValue('electdate', date.toDate());
-      //   }
-      // },
+
     },
   },
   { timestamps: false, freezeTableName: true }

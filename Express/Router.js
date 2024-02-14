@@ -1,14 +1,15 @@
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const { logintable } = require("./Table");
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const { aadhartable } = require("./TableAadhar");
 const { candiTable } = require("./TableCandidate");
 const { dummycandiTable } = require("./TableCandiDummy");
 const { AddElectionTable } = require("./AddElection");
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const { admintable } = require("./AdminLoginTable");
+const { logintable } = require("./Table");
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * => getAadharData {This API  is used to fetch the data of user with given AADHAR number}
+ */
 const getAadharData = async (req, res) => {
   try {
     const id = req.params.reqid;
@@ -26,10 +27,12 @@ const getAadharData = async (req, res) => {
       .json({ message: "Internal server error. Please try after some time" });
   }
 };
+////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * => getUserCredential {This API is used to fetch  the user credentials}
+ *
+ */
 
-router.post("/fromaadhartable/:reqid", getAadharData); // to fetch aadhar data from Aadhaar Table
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const getUserCredential = async (req, res) => {
   try {
     const id = req.params.reqid;
@@ -49,13 +52,10 @@ const getUserCredential = async (req, res) => {
       .json({ message: "Internal server error. Please try after some time" });
   }
 };
-
-router.get("/:reqid", getUserCredential); // to fetch user credential
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// To check the user is already exist or not in Login table
-
+////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * => postUserCredential {This API  is used to add new User details in database.}
+ */
 const postUserCredential = async (req, res) => {
   try {
     const { AadhaarNumber, password } = req.body;
@@ -77,10 +77,10 @@ const postUserCredential = async (req, res) => {
     });
   }
 };
-
-router.post("/adduserinuserlogin", postUserCredential); //This will add user credential in user login table
-////////////////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * => verifyUserCredential {This API  is used to validate  user credentials}
+ */
 const verifyUserCredential = async (req, res) => {
   const { AadhaarNumber, password } = req.body;
 
@@ -104,13 +104,10 @@ const verifyUserCredential = async (req, res) => {
     }
   }
 };
-router.post("/verifyusercredential", verifyUserCredential); ///verify the credential with password {http://localhost:1234/verify}
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * => getCandiCredential {This API  will be used to fetch the candidate's login credentials}
+ */
 const getCandiCredential = async (req, res) => {
   try {
     const id = req.params.reqid;
@@ -128,108 +125,11 @@ const getCandiCredential = async (req, res) => {
       .json({ message: "Internal server error. Please try after some time" });
   }
 };
-
-router.get("/candidates/:reqid", getCandiCredential);
-///////////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// const postCredentialadm = async (req, res) => {
-//   try {
-//     const { AadhaarNumber, password } = req.body;
-
-//     // Hash the password using bcrypt
-//     const salt = await bcrypt.genSalt(10);
-//     const hashedPassword = await bcrypt.hash(password, salt);
-
-//     // Save the hashed password to the database
-//     const data = { AadhaarNumber, password: hashedPassword };
-//     const temp = await admtbl.create(data); // assuming logintable is a model that has a create method
-
-//     res.json(temp); // return the saved data as a response
-//   } catch (error) {
-//     // handle any errors that occur during the process
-//     res.status(500).json({ error: "An error occurred while saving the data." });
-//   }
-// };
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// const updateCredential = async (req, res) =>{
-//     try {
-//       const { AadhaarNumber, password } = req.body;
-
-//       // Check if AadhaarNumber is provided
-//       if (!AadhaarNumber) {
-//         return res.status(400).json({ error: "Aadhaar Number is required" });
-//       }
-
-//       // Check if password is provided
-//       if (!password) {
-//         return res.status(400).json({ error: "Password is required" });
-//       }
-
-//       // Your code to update the password in the database goes here
-//       const hashedPassword=await bcrypt.hash(password, 10);
-//       const updatedUser = await logintable.update({password:hashedPassword}, {where:{AadhaarNumber}});
-
-//       // Send response back with status and message
-//       return res.status(200).json({message:"Updated Successfully!", data:updatedUser});
-//     } catch (error) {
-//       console.log(error);
-//       res.status(500).json({ message: "Error Updating Data!" });
-//     }
-// }
-
-// const updateData = async (req, res) => {
-//   const data = req.body;
-//   const std = { ...data };
-//   delete std.id;
-//   const upd = await table.update(std, {
-//     where: {
-//       id: data.id,
-//     },
-//   });
-// };
-
-// const updateCredential = async (req, res) => {
-//   const { AadhaarNumber, password } = req.body;
-//   try {
-//     if (!AadhaarNumber) {
-//       return res.status(400).json({ error: "Aadhaar Number is required" });
-//     }
-//     if (!password) {
-//       return res.status(400).json({ error: "Password is required" });
-//     }
-//     const user = await logintable.findByPk(AadhaarNumber);
-//     if (!user) {
-//       return res.status(400).json({ error: "Invalid Aadhaar Number" });
-//     }
-//     const salt = user.Salt;
-//     const isValidPassword = await bcrypt.compare(password, user.Password, salt);
-//     if (!isValidPassword) {
-//       return res.status(401).send({ auth: false, token: null }).end();
-//     } else {
-//       let newPass = await bcrypt.hash(password, salt);
-//       await logintable.update(
-//         { Password: newPass },
-//         { where: { AadhaarNumber } }
-//       );
-//       return res.status(200).send("Updated Successfully");
-//     }
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(500).send("Error in updating credentials");
-//   }
-// };
-
-// router.post("/addadm", postCredentialadm);
-//Adds new credential {http://localhost:1234/add}
-
-// router.put(":/id", updateCredential); //Updates existing credential by Id and otp verification
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-const postCredentialAdmin = async (req, res) => {
+///////////////////////////////////////////////////////////////////////////////////////
+/**
+ * => postCredentialAdmin {This API is used to register new  candidate in the system}
+ */
+const postCredentialCandidate = async (req, res) => {
   try {
     const { AadhaarNumber, password } = req.body;
     // Hash the password using bcrypt
@@ -250,28 +150,11 @@ const postCredentialAdmin = async (req, res) => {
     });
   }
 };
-//////////////////////////////////////////////////////////////////////////////////////////
-
-router.post("/addCandidate", postCredentialAdmin);
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// const getAadharData = async (req, res) =>{
-//   const AadharNumber=req.params.reqid;
-//   try{
-//    const data = await aadhartable.findByPk(AadharNumber);
-//    if(!data){
-//      throw Error('User not found');
-//    }else{
-//      return res.status(200).json(data);
-//    }
-//   }catch(err){
-//     console.log(err);
-//     return res.status(404).json({message:"Not Found!"});
-//   }
-
-// };
-
-// router.get("/", getAllData);
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * => addDummyCandidate {This API is taking input from  user and adding it into dummy table}
+ *
+ */
 const addDummyCandidate = async (req, res) => {
   try {
     const data = req.body;
@@ -283,7 +166,11 @@ const addDummyCandidate = async (req, res) => {
     console.log(e.message);
   }
 };
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * => addElection {This API is  for admin to add election details in the Election Table.}
+ *
+ */
 const addElection = async (req, res) => {
   const data = req.body;
   console.log(data.electname);
@@ -296,7 +183,10 @@ const addElection = async (req, res) => {
     console.log(`Error occured`, error);
   }
 };
-
+//////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * => getelectionlist{This API  will return all the records of Election Table}
+ */
 const getelectionlist = async (req, res) => {
   try {
     const result = await AddElectionTable.findAll({});
@@ -306,6 +196,10 @@ const getelectionlist = async (req, res) => {
   }
 };
 
+///////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * => fetchAllCandidate {This API  returns all candidate list from Candidates table}.
+ */
 const fetchAllCandidate = async (req, res) => {
   try {
     const data = await dummycandiTable.findAll({});
@@ -314,10 +208,67 @@ const fetchAllCandidate = async (req, res) => {
     console.log("Server Error : Reffer Router.js", error);
   }
 };
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * => addNewAdmin {This API  is used to add new admin in Admin table.}
+ */
+const addNewAdmin = async (req, res) => {
+  try {
+    const { id, password } = req.body;
+    // Hash the password using bcrypt
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
+    // Save the hashed password to the database
+    const data = { id: id, password: hashedPassword };
+    const temp = await admintable.create(data); // assuming logintable is a model that has a create method
+
+    res.json(temp); // return the saved data as a response
+  } catch (error) {
+    console.log("Eroor : ", error.message);
+    // handle any errors that occur during the process
+    res.status(500).json({
+      error: "An error occurred while saving the data.",
+    });
+  }
+};
+////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * => verifyAdmin {This API is  used for checking validating admin credentials}
+ */
+const verifyAdmin = async (req, res) => {
+  const { id, password } = req.body;
+
+  if (!id || !password) {
+    return res.status(400).json({ message: "Please enter all the details" });
+  } else {
+    let admin = await admintable.findByPk(id);
+
+    if (!admin) {
+      return res.status(404).json({ message: "Data does not exist" });
+    } else {
+      const validPass = await bcrypt.compare(password, admin.password);
+      if (!validPass) {
+        return res.status(401).json({ message: "Invalid Password!" });
+      } else {
+        return res.status(200).json({ message: "Valid User!" });
+      }
+    }
+  }
+};
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+router.get("/:reqid", getUserCredential); // to fetch user credential
 router.post("/addDummyCandidate", addDummyCandidate);
 router.post("/addelection", addElection);
 router.get("/get/election/list", getelectionlist);
 router.post("/get/candidate/list", fetchAllCandidate);
+router.post("/fromaadhartable/:reqid", getAadharData); // to fetch aadhar data from Aadhaar Table
+router.post("/add/admin", addNewAdmin);
+router.post("/verify/admin", verifyAdmin);
+router.post("/addCandidate", postCredentialCandidate);
+router.get("/candidates/:reqid", getCandiCredential);
+router.post("/adduserinuserlogin", postUserCredential); //This will add user credential in user login table
+router.post("/verifyusercredential", verifyUserCredential); ///verify the credential with password {http://localhost:1234/verify}
 
 module.exports = router;
