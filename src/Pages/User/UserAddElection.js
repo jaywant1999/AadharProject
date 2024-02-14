@@ -24,7 +24,7 @@ const UserAddElection = () => {
         <h2>Select Election</h2>
         <div>
           <button className="submit" type="button" onClick={handleFetchClick}>
-            Fetch
+            Show Elections
           </button>
         </div>
         <div className="election-table-container">

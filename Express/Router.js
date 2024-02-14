@@ -290,14 +290,11 @@ const addElection = async (req, res) => {
   console.log(data.electdate);
 
   try {
-    
     const response = await AddElectionTable.create(data);
-  res.json(response);
-
+    res.json(response);
   } catch (error) {
-    console.log(`Error occured`,error);
+    console.log(`Error occured`, error);
   }
-  
 };
 
 const getelectionlist = async (req, res) => {
@@ -309,8 +306,18 @@ const getelectionlist = async (req, res) => {
   }
 };
 
+const fetchAllCandidate = async (req, res) => {
+  try {
+    const data = await dummycandiTable.findAll({});
+    res.json(data);
+  } catch (error) {
+    console.log("Server Error : Reffer Router.js", error);
+  }
+};
+
 router.post("/addDummyCandidate", addDummyCandidate);
 router.post("/addelection", addElection);
 router.get("/get/election/list", getelectionlist);
+router.post("/get/candidate/list", fetchAllCandidate);
 
 module.exports = router;

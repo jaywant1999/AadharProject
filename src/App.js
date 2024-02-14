@@ -18,6 +18,7 @@ import CandidateLoginPage from "./Pages/Candidate/CandidateLoginPage";
 import CandidateRegistration from "./Pages/Candidate/CandidateRegistration.js"
 import UserAddElection from "./Pages/User/UserAddElection.js"
 import AdminAddElection from "./Pages/Admin/AdminAddElection.js"
+import ValidateCandidate from "./Pages/Admin/ValidateCandidate"
 
 export default function App() {
   return (
@@ -50,6 +51,8 @@ export default function App() {
               <Route path="/UserLogin" element={<UserLogin />} />
               <Route path="/UserAddElection" element={<UserAddElection />} />
               <Route path="/AdminAddElection" element={<AdminAddElection />} />
+              <Route path="/ValidateCandidate" element={<ValidateCandidate />} />
+
               <Route
                 path="/CandidateLoginPage"
                 element={<CandidateLoginPage />}
