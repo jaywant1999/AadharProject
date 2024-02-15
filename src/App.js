@@ -20,6 +20,8 @@ import UserAddElection from "./Pages/User/UserAddElection.js"
 import AdminAddElection from "./Pages/Admin/AdminAddElection.js"
 import ValidateCandidate from "./Pages/Admin/ValidateCandidate"
 import UserVotingPage from  './Pages/User/UserVotingPage'
+import UserProfile from  "./Pages/User/UserProfile.js";
+import AdminProfile from "./Pages/Admin/AdminProfile.js";
 
 export default function App() {
   return (
@@ -43,10 +45,7 @@ export default function App() {
               <Route path="/UserHomePage" element={<UserHomePage />} />
               <Route path="/CandidateOtp" element={<CandidateOtp />} />
               <Route path="/UserVotingPage" element={<UserVotingPage />} />
-              <Route
-                path="/CandidateHomePage"
-                element={<CandidateHomePage />}
-              />
+              <Route path="/CandidateHomePage" element={<CandidateHomePage />} />
               <Route path="/CandidateRegistration" element={<CandidateRegistration />} />
               <Route path="/UserOtp" element={<UserOtp />} />
               <Route path="/SetUserPassword" element={<SetUserPassword />} />
@@ -54,11 +53,9 @@ export default function App() {
               <Route path="/UserAddElection" element={<UserAddElection />} />
               <Route path="/AdminAddElection" element={<AdminAddElection />} />
               <Route path="/ValidateCandidate" element={<ValidateCandidate />} />
-
-              <Route
-                path="/CandidateLoginPage"
-                element={<CandidateLoginPage />}
-              />
+              <Route path="/UserProfile" element={<UserProfile />} />
+              <Route path="/AdminProfile" element={<AdminProfile />} />
+              <Route path="/CandidateLoginPage" element={<CandidateLoginPage />} />
             </Routes>
           </BrowserRouter>
         </div>
