@@ -257,7 +257,20 @@ const verifyAdmin = async (req, res) => {
   }
 };
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+const updateStatusOfCandidate = async (req, res) => {
+  try {
+    const data = req.body;
+    const temp = { ...data };
+    delete temp.AadhaarNumber; //First delete primary key from data
+    const updatedData = await dummycandiTable.update(temp, {
+      where: { AadhaarNumber: data.AadhaarNumber },
+    });
+    res.json(updatedData);
+  } catch (error) {}
+};
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 router.get("/:reqid", getUserCredential); // to fetch user credential
 router.post("/addDummyCandidate", addDummyCandidate);
 router.post("/addelection", addElection);
@@ -270,5 +283,7 @@ router.post("/addCandidate", postCredentialCandidate);
 router.get("/candidates/:reqid", getCandiCredential);
 router.post("/adduserinuserlogin", postUserCredential); //This will add user credential in user login table
 router.post("/verifyusercredential", verifyUserCredential); ///verify the credential with password {http://localhost:1234/verify}
+router.put("/update/candidate/status", updateStatusOfCandidate); //to update candidate status
+
 
 module.exports = router;

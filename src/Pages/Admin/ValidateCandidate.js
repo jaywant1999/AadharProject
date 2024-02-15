@@ -6,12 +6,15 @@ import Axios from "axios";
 
 const ValdidateCandidate = () => {
   const [candidateData, setCandidate] = useState([]);
+  // const [candidateCurrentStatus, setCandidateStatus] = useState("PENDING");
+
 
   const fetchCandidateData = async () => {
     try {
       const response = await Axios.post(
         `http://127.0.0.1:1234/get/candidate/list`
       );
+      console.log(response);
       setCandidate(response.data);
     } catch (error) {
       console.error("Error fetching election:", error);
@@ -20,6 +23,30 @@ const ValdidateCandidate = () => {
 
   const handleFetchCandidate = () => {
     fetchCandidateData();
+  };
+
+  const candidateStatus = (candidateinfo ,status ) => {
+    // setCandidateStatus(status);
+
+    const data = {
+      AadhaarNumber:candidateinfo.AadhaarNumber ,
+      fname: candidateinfo.fname,
+      lname: candidateinfo.lname,
+      gender: candidateinfo.gender,
+      partyname: candidateinfo.partyname,
+      status: status
+    }
+
+    console.log(data);
+    try {
+      const updatebody = Axios.put(`http://127.0.0.1:1234/update/candidate/status`,data);
+      console.log(updatebody);
+      
+    } catch (error) {
+      console.log(error);
+    }
+    
+    
   };
 
   return (
@@ -38,6 +65,7 @@ const ValdidateCandidate = () => {
             <th>Candidate last name</th>
             <th>Gender</th>
             <th>Party Name</th>
+            <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -50,10 +78,15 @@ const ValdidateCandidate = () => {
               <td>{candidateinfo.lname}</td>
               <td>{candidateinfo.gender}</td>
               <td>{candidateinfo.partyname}</td>
+              <td>{candidateinfo.status}</td>
               <td>
                 <div id="actions">
-                  <button>Approve</button>
-                  <button>Reject</button>
+                  <button onClick={() => candidateStatus(candidateinfo,"APPROVED")}>
+                    Approve
+                  </button>
+                  <button onClick={() => candidateStatus(candidateinfo,"REJECTED")}>
+                    Reject
+                  </button>
                 </div>
               </td>
             </tr>

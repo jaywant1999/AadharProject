@@ -21,6 +21,10 @@ const dummycandiTable = Sequelize.define(
     partyname: {
       type: STRING,
     },
+    status:{
+      type : ENUM('PENDING', 'APPROVED', 'REJECTED') ,
+      default:"PENDING" 
+    },
   },
   { timestamps: false, freezeTableName: true }
 );
