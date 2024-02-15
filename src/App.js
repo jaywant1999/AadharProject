@@ -19,6 +19,7 @@ import CandidateRegistration from "./Pages/Candidate/CandidateRegistration.js"
 import UserAddElection from "./Pages/User/UserAddElection.js"
 import AdminAddElection from "./Pages/Admin/AdminAddElection.js"
 import ValidateCandidate from "./Pages/Admin/ValidateCandidate"
+import UserVotingPage from  './Pages/User/UserVotingPage'
 
 export default function App() {
   return (
@@ -41,6 +42,7 @@ export default function App() {
               <Route path="/UserOtp" element={<UserOtp />} />
               <Route path="/UserHomePage" element={<UserHomePage />} />
               <Route path="/CandidateOtp" element={<CandidateOtp />} />
+              <Route path="/UserVotingPage" element={<UserVotingPage />} />
               <Route
                 path="/CandidateHomePage"
                 element={<CandidateHomePage />}

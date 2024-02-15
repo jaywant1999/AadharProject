@@ -8,16 +8,18 @@ const CandidateRegistration = () => {
   const [lastName, setLastName] = useState("");
   const [gender, setGender] = useState("");
   const [partyName, setPartyName] = useState("");
-
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordsMatch, setPasswordsMatch] = useState(true); // State to track if passwords match
   useEffect(() => {
     setCandidateAadhar(sessionStorage.getItem("candidateaadhar")); //Getting saved data from candidate page
   }, []);
 
   const navigate = useNavigate();
 
-  const fun = () => {
-    navigate("/CandidateHomePage");
-  };
+  // const fun = () => {
+  //   navigate("/CandidateHomePage");
+  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,6 +36,12 @@ const CandidateRegistration = () => {
       case "partyName":
         setPartyName(value);
         break;
+      case "password":
+        setPassword(value);
+        break;
+      case "confirmPassword":
+        setConfirmPassword(value);
+        break;
       default:
         break;
     }
@@ -41,6 +49,25 @@ const CandidateRegistration = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setPasswordsMatch(false);
+      alert("Passwords do not match!");
+      return;
+    }
+    const credential = {
+      AadhaarNumber: candidateAadhar,
+      password: password,
+    };
+    try {
+      const resp = await Axios.post(
+        `http://127.0.0.1:1234/addCandidate`,
+        credential
+      );
+      console.log(resp.data);
+    } catch (error) {
+      alert(error);
+    }
+
     const candidateData = {
       AadhaarNumber: candidateAadhar,
       fname: firstname,
@@ -117,6 +144,29 @@ const CandidateRegistration = () => {
             <input type="file" name="addressProof" />
           </label>
           <br />
+          <label>
+            Enter password:
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={handleChange}
+              placeholder="Set Password"
+              required
+            />
+          </label>
+          <br />
+          <label>
+            Re-Enter password:
+            <input
+              type="password"
+              name="confirmPassword"
+              value={confirmPassword}
+              onChange={handleChange}
+              placeholder="Re-Enter Password"
+              required
+            />
+          </label>
 
           <button type="submit">Submit</button>
         </form>

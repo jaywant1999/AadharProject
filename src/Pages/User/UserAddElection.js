@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "../../css/UserAddElection.css";
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const UserAddElection = () => {
+  const navigate = useNavigate();
   const [elections, setElections] = useState([]); // Array of election objects
 
   const fetchElection = async () => {
@@ -17,6 +19,10 @@ const UserAddElection = () => {
   const handleFetchClick = () => {
     fetchElection(); // Call the fetchElection function when the "Fetch" button is clicked
   };
+
+  const selectElection=()=>{
+    navigate('/UserVotingPage');
+  }
 
   return (
     <div className="election-container1">
@@ -35,6 +41,7 @@ const UserAddElection = () => {
                 <th>Elect ID</th>
                 <th>Election Name</th>
                 <th>Election Date</th>
+                <th>Select Election</th>
               </tr>
             </thead>
             <tbody>
@@ -43,6 +50,8 @@ const UserAddElection = () => {
                   <td>{election.electid}</td>
                   <td>{election.electname}</td>
                   <td>{election.electdate}</td>
+                  <button
+                  onClick={selectElection}>Select</button>
                 </tr>
               ))}
             </tbody>

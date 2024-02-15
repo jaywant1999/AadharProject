@@ -268,7 +268,21 @@ const updateStatusOfCandidate = async (req, res) => {
     res.json(updatedData);
   } catch (error) {}
 };
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+const verifyCandidateCredential = async (req, res) => {
+  const { AadhaarNumber, Password } = req.body;
 
+  const user = await dummycandiTable.findByPk(AadhaarNumber);
+  if (!user) {
+    return res.status(401).send("User Not Found");
+  } else {
+    const match = await bcrypt.compare(Password, user.Password);
+    if (!match) {
+      return res.status(401).send("Password Incorrect");
+    }
+    res.status(200).json(user);
+  }
+};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 router.get("/:reqid", getUserCredential); // to fetch user credential
@@ -279,11 +293,12 @@ router.post("/get/candidate/list", fetchAllCandidate);
 router.post("/fromaadhartable/:reqid", getAadharData); // to fetch aadhar data from Aadhaar Table
 router.post("/add/admin", addNewAdmin);
 router.post("/verify/admin", verifyAdmin);
-router.post("/addCandidate", postCredentialCandidate);
+router.post("/addCandidate", postCredentialCandidate);// To Add Candidates Credentials
 router.get("/candidates/:reqid", getCandiCredential);
 router.post("/adduserinuserlogin", postUserCredential); //This will add user credential in user login table
 router.post("/verifyusercredential", verifyUserCredential); ///verify the credential with password {http://localhost:1234/verify}
 router.put("/update/candidate/status", updateStatusOfCandidate); //to update candidate status
+router.post("/verifyCandidateCredential", verifyCandidateCredential); ///verify the credential with password {http://localhost:1234/verify}
 
 
 module.exports = router;
