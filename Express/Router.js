@@ -6,6 +6,7 @@ const { dummycandiTable } = require("./TableCandiDummy");
 const { AddElectionTable } = require("./AddElection");
 const { admintable } = require("./AdminLoginTable");
 const { logintable } = require("./Table");
+const { votingtable } = require("./VotingTable");
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * => getAadharData {This API  is used to fetch the data of user with given AADHAR number}
@@ -41,10 +42,12 @@ const getUserCredential = async (req, res) => {
     if (!resource) {
       return res
         .status(200)
-        .json({ message: "User is not registered", isExist: true });
+        .json({ message: "User is not registered", isExist: false });
+    } else {
+      return res
+        .status(200)
+        .json({ message: "User is already registered!", isExist: true });
     }
-
-    res.status(200).json(resource);
   } catch (error) {
     console.error(error);
     res
@@ -114,10 +117,14 @@ const getCandiCredential = async (req, res) => {
     const resource = await candiTable.findByPk(id);
 
     if (!resource) {
-      return res.status(200).json({ message: "User is not registered" });
+      return res
+        .status(200)
+        .json({ message: "Candidate is not registered", isExist: false });
+    } else {
+      return res
+        .status(200)
+        .json({ message: "Candidate is already registered!", isExist: true });
     }
-
-    res.status(200).json(resource);
   } catch (error) {
     console.error(error);
     res
@@ -270,20 +277,38 @@ const updateStatusOfCandidate = async (req, res) => {
 };
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 const verifyCandidateCredential = async (req, res) => {
-  const { AadhaarNumber, Password } = req.body;
+  const { AadhaarNumber, password } = req.body;
 
-  const user = await dummycandiTable.findByPk(AadhaarNumber);
-  if (!user) {
-    return res.status(401).send("User Not Found");
+  // Checking empty fields
+  if (!AadhaarNumber || !password) {
+    return res.status(400).json({ message: "Please enter all the details" });
+  }
+
+  // Retrieving user data from the local server
+  let userData = await candiTable.findByPk(AadhaarNumber);
+
+  if (!userData) {
+    return res.status(404).json({ message: "Data does not exist" });
   } else {
-    const match = await bcrypt.compare(Password, user.Password);
+    const match = await bcrypt.compare(password, userData.password); //Returns boolean value  whether it matches or not
+    // Comparing hashed password with entered password using bcrypt compare method
     if (!match) {
-      return res.status(401).send("Password Incorrect");
+      return res.status(401).json({ message: "Invalid Password!" });
+    } else {
+      return res.status(200).json({ message: "Valid User!" });
     }
-    res.status(200).json(user);
   }
 };
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+const addUserVote = async (req, res) => {
+  const data = req.body;
+  try {
+    const response = await votingtable.create(data);
+    res.status(200).json({ message: "Vote successfully counted!!!" });
+  } catch (error) {
+    res.json(error);
+  }
+};
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 router.get("/:reqid", getUserCredential); // to fetch user credential
 router.post("/addDummyCandidate", addDummyCandidate);
@@ -293,12 +318,12 @@ router.post("/get/candidate/list", fetchAllCandidate);
 router.post("/fromaadhartable/:reqid", getAadharData); // to fetch aadhar data from Aadhaar Table
 router.post("/add/admin", addNewAdmin);
 router.post("/verify/admin", verifyAdmin);
-router.post("/addCandidate", postCredentialCandidate);// To Add Candidates Credentials
+router.post("/addCandidate", postCredentialCandidate); // To Add Candidates Credentials
 router.get("/candidates/:reqid", getCandiCredential);
 router.post("/adduserinuserlogin", postUserCredential); //This will add user credential in user login table
 router.post("/verifyusercredential", verifyUserCredential); ///verify the credential with password {http://localhost:1234/verify}
 router.put("/update/candidate/status", updateStatusOfCandidate); //to update candidate status
 router.post("/verifyCandidateCredential", verifyCandidateCredential); ///verify the credential with password {http://localhost:1234/verify}
-
+router.post("/add/your/vote", addUserVote);
 
 module.exports = router;

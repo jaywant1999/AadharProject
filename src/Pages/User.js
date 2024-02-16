@@ -12,12 +12,12 @@ const User = () => {
     try {
       console.log(`${aadharID}`);
 
-      const isUserExist = await Axios.get(`http://127.0.0.1:1234/${aadharID}`); // This api is working
-      console.log("isUserExist.data.isExist : ", isUserExist.data);
+      const isUserExist = await Axios.get(`http://127.0.0.1:1234/${aadharID}`); // To check if user already exist
+      console.log("isUserExist.data.isExist : ", isUserExist.data); 
 
-      if (isUserExist.data.isExist) {
+      if (!isUserExist.data.isExist) { //If user does not exist then isExist=false{Router.js line-44}
         const response = await Axios.post(
-          `http://127.0.0.1:1234/fromaadhartable/${aadharID}` //Working api fetching data from aadhaar table
+          `http://127.0.0.1:1234/fromaadhartable/${aadharID}` //Validate  Aadhaar number and send request to server for data fetching
         );
         sessionStorage.setItem("aadhar", response.data.AadhaarNumber);
         setAadharID(response.data);

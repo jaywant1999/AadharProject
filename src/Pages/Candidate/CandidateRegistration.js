@@ -17,9 +17,9 @@ const CandidateRegistration = () => {
 
   const navigate = useNavigate();
 
-  // const fun = () => {
-  //   navigate("/CandidateHomePage");
-  // };
+  const fun = () => {
+    navigate("/CandidateHomePage");
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -81,13 +81,13 @@ const CandidateRegistration = () => {
         "http://127.0.0.1:1234/addDummyCandidate",
         candidateData
       );
+
       console.log(response.data);
       // Handle success
     } catch (error) {
       console.log("Error in adding Candidate : ", error);
     }
-
-    navigate("/CandidateHomePage");
+    fun();
   };
 
   return (

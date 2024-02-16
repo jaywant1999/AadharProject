@@ -5,7 +5,7 @@ import Axios from "axios";
 
 const UserLogin = () => {
   const navigate = useNavigate();
-
+  const [aadharID, setAadharID] = useState("");//Temporary field might delete later
   const [loginData, setLoginData] = useState({
     /**
      * This useState is used when we inserting wrong credential, it will clear the input field
@@ -17,7 +17,6 @@ const UserLogin = () => {
   const handleInputChange = (e) => {
     /**
      *This method is responsible  for taking value of each fields and setting them to empty.
-     *
      */
     const { name, value } = e.target;
     setLoginData({ ...loginData, [name]: value });
@@ -36,13 +35,15 @@ const UserLogin = () => {
           },
         }
       );
-
+      sessionStorage.setItem("aadhar", response.data.AadhaarNumber); //Not working
+      setAadharID(response.data);
+      console.log(response.data);
       if (response.status === 200) {
         alert("Redirecting to UserHomePage");
         navigate("/UserHomePage");
       } else {
         console.log(response);
-        alert("User not found");
+        alert("User not found OR invalid password");
         setLoginData({ AadhaarNumber: "", password: "" });
       }
     } catch (error) {
@@ -63,6 +64,7 @@ const UserLogin = () => {
               value={loginData.AadhaarNumber}
               onChange={handleInputChange}
               placeholder="Enter Aadhar Number"
+              required
             />
           </div>
           <div className="input-container">

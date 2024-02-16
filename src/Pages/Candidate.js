@@ -16,16 +16,16 @@ const Candidate = () => {
       const isCandiExist = await Axios.get(
         `http://127.0.0.1:1234/candidates/${aadharID}`
       );
-      console.log(isCandiExist.data);
+      console.log("isCandiExist.data.isExist : ", isCandiExist.data);
 
-      if (isCandiExist.data) {
+      if (!isCandiExist.data.isExist) {
         const response = await Axios.post(
           `http://127.0.0.1:1234/fromaadhartable/${aadharID}` //this will fetch data from aadhar table
         );
         sessionStorage.setItem("candidateaadhar", response.data.AadhaarNumber); // Changing aadhar to candidateaadhar
         setAadharID(response.data);
         console.log(response.data);
-        alert("It will redirect to the Candidate Otp page!");
+        alert("It will redirect to the Candidate Otp page!"); 
         navigate("/CandidateOtp");
       } else {
         alert("This Aadhaar number is already regestered!");
