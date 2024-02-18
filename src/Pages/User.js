@@ -19,6 +19,12 @@ const User = () => {
         const response = await Axios.post(
           `http://127.0.0.1:1234/fromaadhartable/${aadharID}` //Validate  Aadhaar number and send request to server for data fetching
         );
+        if(response.data.key)
+        {
+          alert('Your age is not valid');
+          return;
+          // navigate(`/Home`);
+        }
         sessionStorage.setItem("aadhar", response.data.AadhaarNumber);
         setAadharID(response.data);
         console.log(response.data);

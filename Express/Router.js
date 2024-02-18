@@ -7,20 +7,32 @@ const { AddElectionTable } = require("./AddElection");
 const { admintable } = require("./AdminLoginTable");
 const { logintable } = require("./Table");
 const { votingtable } = require("./VotingTable");
+const sequelize = require("sequelize");
+const { addresstable } = require("./AddressTable");
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * => getAadharData {This API  is used to fetch the data of user with given AADHAR number}
- */
+ */                                              
 const getAadharData = async (req, res) => {
   try {
     const id = req.params.reqid;
     const resource = await aadhartable.findByPk(id);
 
     if (!resource) {
-      return res.status(404).json({ message: "User is not registered" });
+      return res.status(200).json({ message: "User is not found" });
     }
 
-    res.status(200).json(resource);
+    // Calculate age based on date of birth
+    const dob = new Date(resource.DOB);
+    const ageDiffMs = Date.now() - dob.getTime();
+    const ageDate = new Date(ageDiffMs); // miliseconds from epoch
+    const age = Math.abs(ageDate.getUTCFullYear() - 1970);
+
+    if (age < 18) {
+      return res.status(200).json({ message: "You are not eligible" , key:true});
+    }
+
+    res.status(200).json(resource,{key:false});
   } catch (error) {
     console.error(error);
     res
@@ -28,6 +40,7 @@ const getAadharData = async (req, res) => {
       .json({ message: "Internal server error. Please try after some time" });
   }
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////
 /**
  * => getUserCredential {This API is used to fetch  the user credentials}
@@ -103,7 +116,12 @@ const verifyUserCredential = async (req, res) => {
     if (!match) {
       return res.status(401).json({ message: "Invalid Password!" });
     } else {
-      return res.status(200).json({ message: "Valid User!" });
+      return res
+        .status(200)
+        .json({
+          message: "Valid User!",
+          AadhaarNumber: userData.AadhaarNumber,
+        });
     }
   }
 };
@@ -302,14 +320,77 @@ const verifyCandidateCredential = async (req, res) => {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 const addUserVote = async (req, res) => {
   const data = req.body;
+  const { Candidateid, Userid } = data;
+  // const checkvote = await votingtable.findOne({ where: { UserId: Userid } });
+  // if(checkvote)
+  // {
+  //   return res.status(200).json({isVoted:true, message:"User already voted!!!"})
+  // }
+  console.log("Data from frontend", data);
+
   try {
     const response = await votingtable.create(data);
-    res.status(200).json({ message: "Vote successfully counted!!!" });
+    res
+      .status(200)
+      .json({
+        message: "Vote successfully counted!!!",
+        responseData: response,
+      });
   } catch (error) {
     res.json(error);
   }
 };
+
+const votingResult = async (req, res) => {
+  try {
+    const counts = await votingtable.findAll({
+      attributes: [
+        "candidateid",
+        [sequelize.fn("COUNT", sequelize.col("candidateid")), "count"],
+      ],
+      group: ["candidateid"],
+    });
+
+    res.status(200).json({ counts });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: "Internal server error. Please try after some time" });
+  }
+};
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+const checkVotingStatus = async (req, res)=> {
+
+  try {
+
+    const {Candidateid, Userid} = req.body;
+    const data = await  votingtable.findOne({where:{Userid : Userid}});
+    console.log("Printing",data);
+    if(data){
+      return res.status(200).json({auth:false , msg:"You have already voted."});
+    }else{
+       return res.status(200).json({auth:true ,msg:"You can vote!!!"})
+    }
+    
+  } catch (error) {
+    return res.status(500).json({message:"Server Error! Try Again Later."});
+  }
+
+};
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+const getUserAddressFromAadhar = async (req, res) =>{
+try {
+  const reqid = req.params.reqid;
+  const address = await addresstable.findByPk(reqid);
+  res.json(address);
+} catch (error) {
+  return res.json(error);
+}
+
+};
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+router.get("/votingresult", votingResult); // It is fetching  the result of election by counting votes for each candidate
 router.get("/:reqid", getUserCredential); // to fetch user credential
 router.post("/addDummyCandidate", addDummyCandidate);
 router.post("/addelection", addElection);
@@ -325,5 +406,7 @@ router.post("/verifyusercredential", verifyUserCredential); ///verify the creden
 router.put("/update/candidate/status", updateStatusOfCandidate); //to update candidate status
 router.post("/verifyCandidateCredential", verifyCandidateCredential); ///verify the credential with password {http://localhost:1234/verify}
 router.post("/add/your/vote", addUserVote);
+router.post("/check/if/already/voted", checkVotingStatus); //It will check  whether the user has already voted or not
+router.post("/get/users/address/fromaadhar/:reqid",  getUserAddressFromAadhar); //To get user address from Aadhar
 
 module.exports = router;

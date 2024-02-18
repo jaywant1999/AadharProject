@@ -4,7 +4,8 @@ import Axios from "axios";
 
 // import "datatables.net";
 
-const ValdidateCandidate = () => {
+const ValdidateCandidate = () =>
+{
   const [candidateData, setCandidate] = useState([]);
   // const [candidateCurrentStatus, setCandidateStatus] = useState("PENDING");
 

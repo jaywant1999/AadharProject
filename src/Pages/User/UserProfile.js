@@ -1,17 +1,35 @@
-import React from 'react';
-import '../../css/UserProfile.css';
+import React, { useState, useEffect } from "react";
+import "../../css/UserProfile.css";
+import Axios from "axios";
+import { useNavigate } from "react-router-dom"; 
 
-const UserProfile = () => {//We have to display all dynamic data from aadhar database
-  const userData = {
-    aadharNumber: "1234 5678 9012",
-    name: "John Doe",
-    address: "123 Main St, City, Country",
-    email: "john.doe@example.com",
-    dob: "1990-01-01",
-    gender: "Male",
-    mobileNumber: "+1234567890",
+const UserProfile = () => {
+  const navigate = useNavigate();
+  const [myuserData, setMyUserData] = useState({});
+  const [addData, setAddData] = useState({});
+
+  const MyData = async (aadhar) => {
+    try {
+      const response1 = await Axios.post(
+        `http://127.0.0.1:1234/fromaadhartable/${aadhar}`
+      );
+      setMyUserData(response1.data);
+      const response2 = await Axios.post(
+        `http://127.0.0.1:1234/get/users/address/fromaadhar/${aadhar}`
+      );
+      console.log(" my Address : ", response2.data);
+      setAddData(response2.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      alert("Please login First!!!");
+      navigate("/Home");
+    }
   };
-  // const [userData, setUserData] = useState(null); 
+
+  useEffect(() => {
+    let aadhar = sessionStorage.getItem("aadhar");
+    MyData(aadhar);
+  }, []);
 
   return (
     <div className="profile-container">
@@ -21,37 +39,44 @@ const UserProfile = () => {//We have to display all dynamic data from aadhar dat
           <tbody>
             <tr>
               <td>Aadhar Number:</td>
-              <td>{userData.aadharNumber}</td>
+              <td>{myuserData.AadhaarNumber}</td>
             </tr>
             <tr>
               <td>Name:</td>
-              <td>{userData.name}</td>
+              <td>
+                {myuserData.FirstName}
+                {myuserData.Middlename}
+                {myuserData.LastName}
+              </td>
             </tr>
             <tr>
               <td>Address:</td>
-              <td>{userData.address}</td>
+              <td>
+                {addData.Village} {addData.Taluka} {addData.District}{" "}
+                {addData.State} {addData.Country} {addData.Pincode}
+              </td>
             </tr>
             <tr>
               <td>Email:</td>
-              <td>{userData.email}</td>
+              <td>{myuserData.Email}</td>
             </tr>
             <tr>
               <td>Date of Birth:</td>
-              <td>{userData.dob}</td>
+              <td>{myuserData.DOB}</td>
             </tr>
             <tr>
               <td>Gender:</td>
-              <td>{userData.gender}</td>
+              <td>{myuserData.Gender}</td>
             </tr>
             <tr>
               <td>Mobile Number:</td>
-              <td>{userData.mobileNumber}</td>
+              <td>{myuserData.MobileNumber}</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
   );
-}
+};
 
 export default UserProfile;

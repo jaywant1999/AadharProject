@@ -22,6 +22,8 @@ import ValidateCandidate from "./Pages/Admin/ValidateCandidate"
 import UserVotingPage from  './Pages/User/UserVotingPage'
 import UserProfile from  "./Pages/User/UserProfile.js";
 import AdminProfile from "./Pages/Admin/AdminProfile.js";
+import CandidateRegisDemo from "./Pages/Candidate/CandidateRegisDemo.js";
+import Card from "./Pages/Admin/Card.js";
 
 export default function App() {
   return (
@@ -56,6 +58,8 @@ export default function App() {
               <Route path="/UserProfile" element={<UserProfile />} />
               <Route path="/AdminProfile" element={<AdminProfile />} />
               <Route path="/CandidateLoginPage" element={<CandidateLoginPage />} />
+              <Route path="/CandidateRegisDemo" element={<CandidateRegisDemo />} />
+              <Route path="/Card" element={<Card />} />
             </Routes>
           </BrowserRouter>
         </div>

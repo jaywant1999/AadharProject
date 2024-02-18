@@ -23,8 +23,9 @@ const SetUserPassword = () => {
       const response = await Axios.post(`http://127.0.0.1:1234/adduserinuserlogin/`, userData); //working Saving credentials into user login table
       console.log(response.data.message);
       // setIsValid(response.data.message);
-      alert("It will redirect to the User Home page"); // Show an alert when the button is clicked
-      navigate("/UserHomePage"); // Navigate to the admin home page
+      alert("It will redirect to the User Home page"); 
+      sessionStorage.clear();// Show an alert when the button is clicked
+      navigate("/UserLogin"); // Navigate to the admin home page
     } catch (e) {
       console.log(e.response.data.error);
       alert(e.response.data.error);

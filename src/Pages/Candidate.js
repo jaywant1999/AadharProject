@@ -22,6 +22,12 @@ const Candidate = () => {
         const response = await Axios.post(
           `http://127.0.0.1:1234/fromaadhartable/${aadharID}` //this will fetch data from aadhar table
         );
+        if(response.data.key)
+        {
+          alert('Your age is not valid');
+          return;
+          // navigate(`/Home`);
+        }
         sessionStorage.setItem("candidateaadhar", response.data.AadhaarNumber); // Changing aadhar to candidateaadhar
         setAadharID(response.data);
         console.log(response.data);

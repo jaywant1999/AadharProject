@@ -1,11 +1,15 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Axios from "axios";
+import {useNavigate} from  'react-router-dom';
 
 const UserVotingPage = () => {
+  const navigate =  useNavigate();
+  const [aadhar, setAaadhar] = useState("");
 
   useEffect(() => {
     fetchData();
+    setAaadhar(sessionStorage.getItem("aadhar"));
   }, []);
 
   const [tableData, setTableData] = useState([]);
@@ -15,19 +19,47 @@ const UserVotingPage = () => {
       const response = await Axios.post(
         `http://127.0.0.1:1234/get/candidate/list`
       );
-       // Filter candidates whose status is "APPROVED"
-       const approvedCandidates = response.data.filter(
+      // Filter candidates whose status is "APPROVED"
+      const approvedCandidates = response.data.filter(
         (candidate) => candidate.status === "APPROVED"
       );
       setTableData(approvedCandidates);
-      console.log(response);
-      
+      // console.log(response);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
+  const addYourVote = async (candidate) => {
+    const votingbody = {
+      Userid: aadhar,
+      Candidateid: candidate.AadhaarNumber,
+    };
+    // console.log(votingbody);
+    try {
+      const checkStatus = await Axios.post(
+        `http://127.0.0.1:1234/check/if/already/voted`, //It will check for  the user if he has already voted or not
+        votingbody
+      );
 
- 
+      // console.log(checkStatus.data.msg);
+
+      if (checkStatus.data.auth) {
+        const votedata = await Axios.post(
+          `http://127.0.0.1:1234/add/your/vote`, //It will cast the vote  for user with AADHAR number stored in session
+          votingbody
+        );
+        alert("Voted Successfully");
+        navigate('/Home');
+      }else{
+        alert("You have already Voted!");
+        navigate('/Home');
+      }
+
+      sessionStorage.clear();// It will clear  all the values stored in the session storage of browser
+    } catch (error) {
+      // console.log("Error in adding vote : ", error);
+    }
+  };
 
   return (
     <div className="UserVoting-table-container">
@@ -52,7 +84,7 @@ const UserVotingPage = () => {
               <td>{candidate.status}</td>
               <td>
                 <div id="actions">
-                  <button>Vote</button>
+                  <button onClick={() => addYourVote(candidate)}>Vote</button>
                 </div>
               </td>
             </tr>

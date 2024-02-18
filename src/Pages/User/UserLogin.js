@@ -40,7 +40,7 @@ const UserLogin = () => {
       console.log(response.data);
       if (response.status === 200) {
         alert("Redirecting to UserHomePage");
-        navigate("/UserHomePage");
+         navigate("/UserHomePage");
       } else {
         console.log(response);
         alert("User not found OR invalid password");
