@@ -2,23 +2,29 @@ import React, { useState, useEffect } from "react";
 import "../../css/UserProfile.css";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom"; 
+import UserSideBar from "./UserSideBar";
 
 const UserProfile = () => {
   const navigate = useNavigate();
   const [myuserData, setMyUserData] = useState({});
   const [addData, setAddData] = useState({});
 
+
+
+  
   const MyData = async (aadhar) => {
     try {
       const response1 = await Axios.post(
         `http://127.0.0.1:1234/fromaadhartable/${aadhar}`
       );
+      console.log("Aadhar data::::",response1 );
       setMyUserData(response1.data);
       const response2 = await Axios.post(
         `http://127.0.0.1:1234/get/users/address/fromaadhar/${aadhar}`
       );
       console.log(" my Address : ", response2.data);
       setAddData(response2.data);
+      console.log("Address data::::",response1 );
     } catch (error) {
       console.error("Error fetching data:", error);
       alert("Please login First!!!");
@@ -32,6 +38,9 @@ const UserProfile = () => {
   }, []);
 
   return (
+    <>
+    <UserSideBar/>
+    
     <div className="profile-container">
       <div className="profile-box">
         <h2>User Profile</h2>
@@ -52,7 +61,7 @@ const UserProfile = () => {
             <tr>
               <td>Address:</td>
               <td>
-                {addData.Village} {addData.Taluka} {addData.District}{" "}
+                {addData.Taluka} {addData.District}{" "}
                 {addData.State} {addData.Country} {addData.Pincode}
               </td>
             </tr>
@@ -76,6 +85,7 @@ const UserProfile = () => {
         </table>
       </div>
     </div>
+    </>
   );
 };
 

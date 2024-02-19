@@ -13,7 +13,7 @@ const Candidate = () => {
     try {
       console.log(`${aadharID}`);
 
-      const isCandiExist = await Axios.get(
+      const isCandiExist = await Axios.post(
         `http://127.0.0.1:1234/candidates/${aadharID}`
       );
       console.log("isCandiExist.data.isExist : ", isCandiExist.data);
@@ -28,7 +28,7 @@ const Candidate = () => {
           return;
           // navigate(`/Home`);
         }
-        sessionStorage.setItem("candidateaadhar", response.data.AadhaarNumber); // Changing aadhar to candidateaadhar
+        sessionStorage.setItem("candidateaadhar", aadharID); // Changing aadhar to candidateaadhar
         setAadharID(response.data);
         console.log(response.data);
         alert("It will redirect to the Candidate Otp page!"); 

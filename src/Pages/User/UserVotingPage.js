@@ -2,6 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import {useNavigate} from  'react-router-dom';
+import UserSideBar from "./UserSideBar";
+import '../../css/UserVotingPage.css';
 
 const UserVotingPage = () => {
   const navigate =  useNavigate();
@@ -62,6 +64,8 @@ const UserVotingPage = () => {
   };
 
   return (
+    <>
+    <UserSideBar/>
     <div className="UserVoting-table-container">
       <h1>Voting Table</h1>
       <table id="basic-data-table" className="table nowrap">
@@ -92,6 +96,7 @@ const UserVotingPage = () => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../../css/ValidateCandidate.css";
 import Axios from "axios";
+import AdminSideBar from "./AdminSideBar";
 
 // import "datatables.net";
 
@@ -51,6 +52,8 @@ const ValdidateCandidate = () =>
   };
 
   return (
+    <>
+    <AdminSideBar/>
     <div class="admin-table-container">
       <h1>Candidate Validation</h1>
       <div>
@@ -95,6 +98,7 @@ const ValdidateCandidate = () =>
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 

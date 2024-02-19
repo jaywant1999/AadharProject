@@ -2,38 +2,34 @@
     background: rgb(14, 22, 95);
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 0px 30px;
+    align-items: start;
+    padding: 0px 20px;
     box-shadow: 0px 8px 15px 0px rgb(83, 81, 81);
-    border-radius: 15px;
+    border-radius: 10px;
     width:100%;
     height: 100px;
     font-family:Arial, Helvetica, sans-serif;
-    margin-top: 4px;
-    
-}
-
-  
-
-.active{
-    box-flex-group: rgb(2, 2, 56);
+    margin: -5px;
 }
 
 #img1{
     width: 60px;
     height: 60px;
     margin-left: -7px;
+    margin-top: 15px;
 }
 
 ul{
     display: flex;
     justify-content: flex-end;
     flex-direction:row;
-    margin-top: 10px;
+    align-content: center;
+    margin-top: 30px;
 }
 
 .Navbar-logo{
     position: absolute;
+    text-align: start;
     background:linear-gradient(
         135deg,#ee4e0a,white,rgb(5, 219, 5)
       );
@@ -41,16 +37,17 @@ ul{
       -webkit-text-fill-color: transparent;
       font-size: 25px;
       top:5%;
-      margin-top: 30px;
+      margin-top: 20px;
       margin-left: 60px;
- 
+     
 }
 
+ 
 .menu{
     display: flex;
     grid-template-columns: repeat(5);
     list-style: none;
-    align-items: flex-end;
+    align-items: end;
     justify-content: flex-end;
     grid-gap: 15px;
     width: 100%;
@@ -114,15 +111,22 @@ ul li{
     display: none;
 }
 
-@media screen and (max-width:900px) {
+
+
+@media screen and (max-width:1000px) {
+
+    .NavbarItems{
+        align-items: flex-start;
+    }
+
 
     nav .menu{
         display: flex;
-       
+        top: 30px;
+         
     }
 
     nav{
-         
         flex-direction: column;
         background: #011042;
         z-index: 1;
@@ -149,28 +153,32 @@ ul li{
         align-content: flex-start;
         width: 60px;
         height: 60px;
-        margin-top:15px;
-        margin-left: 0;
+        margin-right: 10px;
         position: sticky;
         left: 0;
+        margin-left: -7px;
+        margin-top: 15px;
     }
 
     .Navbar-logo{
-          margin-top: 23px;
-          margin-left: 0;
+          margin-top: 21px;
+          margin-left: -3px;
           position: sticky;
           left: 0;
+          text-align: start;
+        
     }
 
      nav .open{
         display: flex;
         border-bottom-left-radius: 25px;
         border-bottom-right-radius: 25px;
-        margin-left: 0;
+        margin-left: 0px;
         padding: 0;
         width: 100%;
-        z-index: 1;
-        
+        justify-content: center;
+        align-items: center;
+        z-index: 1;        
      }
 
      .links:hover{

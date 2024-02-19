@@ -1,0 +1,11 @@
+.statisticscontainer {
+	display: grid;
+	place-items: center;
+	height: 100vh; /* Set to 100% of the viewport height */
+    width: 100%;
+  }
+  
+  .chart-container {
+	margin: 10px; /* Adjust margin as needed */
+  }
+  

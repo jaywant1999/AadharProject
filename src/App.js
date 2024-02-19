@@ -7,6 +7,7 @@ import Admin from "./Pages/Admin.js";
 import Candidate from "./Pages/Candidate.js";
 import User from "./Pages/User.js";
 import Help from "./Pages/HelpPage.js";
+import AdminHelp from "./Pages/Admin/AdminHelp.js"
 import AdminHome from "./Pages/Admin/AdminHome.js";
 import UserHomePage from "./Pages/User/UserHomePage.js";
 import CandidateHomePage from "./Pages/Candidate/CandidateHomePage.js";
@@ -24,6 +25,11 @@ import UserProfile from  "./Pages/User/UserProfile.js";
 import AdminProfile from "./Pages/Admin/AdminProfile.js";
 import CandidateRegisDemo from "./Pages/Candidate/CandidateRegisDemo.js";
 import Card from "./Pages/Admin/Card.js";
+import AdminStatistics from "./Pages/Admin/AdminStatistics.js";
+import UserHelp from "./Pages/User/UserHelp.js";
+import CandidateProfile from "./Pages/Candidate/CandidateProfile.js";
+import CandidateHelp from "./Pages/Candidate/CandidateHelp.js";
+import CandidateStatus from "./Pages/Candidate/CandidateStatus.js";
 
 export default function App() {
   return (
@@ -41,6 +47,7 @@ export default function App() {
               <Route path="/Admin" element={<Admin />} />
               <Route path="/Candidate" element={<Candidate />} />
               <Route path="/User" element={<User />} />
+              <Route path="/UserHelp" element={<UserHelp/>} />
               <Route path="/Help" element={<Help />} />
               <Route path="/AdminHome" element={<AdminHome />} />
               <Route path="/UserOtp" element={<UserOtp />} />
@@ -49,6 +56,9 @@ export default function App() {
               <Route path="/UserVotingPage" element={<UserVotingPage />} />
               <Route path="/CandidateHomePage" element={<CandidateHomePage />} />
               <Route path="/CandidateRegistration" element={<CandidateRegistration />} />
+              <Route path="/CandidateProfile" element={<CandidateProfile />} />
+              <Route path="/CandidateHelp" element={<CandidateHelp/>} />
+              <Route path="/CandidateStatus" element={<CandidateStatus/>} />
               <Route path="/UserOtp" element={<UserOtp />} />
               <Route path="/SetUserPassword" element={<SetUserPassword />} />
               <Route path="/UserLogin" element={<UserLogin />} />
@@ -59,7 +69,10 @@ export default function App() {
               <Route path="/AdminProfile" element={<AdminProfile />} />
               <Route path="/CandidateLoginPage" element={<CandidateLoginPage />} />
               <Route path="/CandidateRegisDemo" element={<CandidateRegisDemo />} />
+              <Route path="/AdminHelp" element={<AdminHelp />} />
+              <Route path="/AdminStatistics" element={<AdminStatistics />} />
               <Route path="/Card" element={<Card />} />
+              
             </Routes>
           </BrowserRouter>
         </div>

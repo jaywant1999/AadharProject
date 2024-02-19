@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 
 
 const CandidateHomePage=()=> {
@@ -16,6 +17,7 @@ const CandidateHomePage=()=> {
       <ul>
         <li>Candidate Profile</li>
         <li>Candidate Status</li>
+        <li><Link to="/UserAddElection">Add Election</Link></li>
         <li>Candidate Help</li>
         <li>Logout</li>
       </ul>

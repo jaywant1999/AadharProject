@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../../css/UserAddElection.css";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
+import UserSideBar from "./UserSideBar";
 
 const UserAddElection = () => {
   const navigate = useNavigate();
@@ -25,6 +26,8 @@ const UserAddElection = () => {
   }
 
   return (
+    <>
+    <UserSideBar/>
     <div className="election-container1">
       <div className="UserAddElection">
         <h2>Select Election</h2>
@@ -59,6 +62,7 @@ const UserAddElection = () => {
         </div>
       </div>
     </div>
+    </>
 );
 };
 

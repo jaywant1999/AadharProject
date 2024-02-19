@@ -3,6 +3,7 @@ import { useState } from 'react';
 import '../../css/AdminAddElection.css'
 import '../Admin/AdminHome.js'
 import Axios from  'axios';
+import AdminSideBar from './AdminSideBar.js';
 
 const AdminAddElection=()=> {
      // State variables to store election details
@@ -46,6 +47,8 @@ const AdminAddElection=()=> {
 
 
   return (
+    <>
+    <AdminSideBar/>
     <div className='election-container'>
     <div className='Addelection-admin '>
       <h2 id='election'>Add Election</h2>
@@ -75,6 +78,7 @@ const AdminAddElection=()=> {
       </form>
     </div>
     </div>
+    </>
   );
 }
 

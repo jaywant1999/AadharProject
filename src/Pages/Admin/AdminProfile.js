@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../css/AdminProfile.css'; // Assuming you have a separate CSS file for Admin Profile styling
+import AdminSideBar from './AdminSideBar';
 
 const AdminProfile = () => {
   const adminData = {
@@ -10,7 +11,9 @@ const AdminProfile = () => {
   };
 
   return (
-    <div className="profile-container">
+    <>
+    <AdminSideBar/>
+    <div className="admin-profile-container">
       <div className="profile-box">
         <h2>Admin Profile</h2>
         <table className="profile-table">
@@ -35,6 +38,7 @@ const AdminProfile = () => {
         </table>
       </div>
     </div>
+    </>
   );
 }
 

@@ -1,5 +1,6 @@
 import React from "react";
 import "../../css/Card.css"
+import AdminSideBar from "./AdminSideBar";
 
 const Card = () => {
   const candidates = [
@@ -11,6 +12,8 @@ const Card = () => {
     { id: 6, name: "John Carpenter", party: "BJP", status: "Pending" },
   ];
   return (
+    <>
+    <AdminSideBar/>
     <div className="adminaddcontainer">
       <div className="card-container">
         {candidates.map((candidate) => (
@@ -26,6 +29,7 @@ const Card = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
+const multer = require ('multer')
 const { aadhartable } = require("./TableAadhar");
 const { candiTable } = require("./TableCandidate");
 const { dummycandiTable } = require("./TableCandiDummy");
@@ -9,10 +10,12 @@ const { logintable } = require("./Table");
 const { votingtable } = require("./VotingTable");
 const sequelize = require("sequelize");
 const { addresstable } = require("./AddressTable");
+const { candidateregistration } = require("./CandidateRegistrationTable");
+const { Filedetails } = require("./FileTable");
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * => getAadharData {This API  is used to fetch the data of user with given AADHAR number}
- */                                              
+ */
 const getAadharData = async (req, res) => {
   try {
     const id = req.params.reqid;
@@ -29,10 +32,12 @@ const getAadharData = async (req, res) => {
     const age = Math.abs(ageDate.getUTCFullYear() - 1970);
 
     if (age < 18) {
-      return res.status(200).json({ message: "You are not eligible" , key:true});
+      return res
+        .status(200)
+        .json({ message: "You are not eligible", key: true });
     }
 
-    res.status(200).json(resource,{key:false});
+    res.status(200).json({ key: false , resource:resource});
   } catch (error) {
     console.error(error);
     res
@@ -116,12 +121,10 @@ const verifyUserCredential = async (req, res) => {
     if (!match) {
       return res.status(401).json({ message: "Invalid Password!" });
     } else {
-      return res
-        .status(200)
-        .json({
-          message: "Valid User!",
-          AadhaarNumber: userData.AadhaarNumber,
-        });
+      return res.status(200).json({
+        message: "Valid User!",
+        AadhaarNumber: userData.AadhaarNumber,
+      });
     }
   }
 };
@@ -330,12 +333,10 @@ const addUserVote = async (req, res) => {
 
   try {
     const response = await votingtable.create(data);
-    res
-      .status(200)
-      .json({
-        message: "Vote successfully counted!!!",
-        responseData: response,
-      });
+    res.status(200).json({
+      message: "Vote successfully counted!!!",
+      responseData: response,
+    });
   } catch (error) {
     res.json(error);
   }
@@ -360,39 +361,126 @@ const votingResult = async (req, res) => {
   }
 };
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-const checkVotingStatus = async (req, res)=> {
-
+const checkVotingStatus = async (req, res) => {
   try {
-
-    const {Candidateid, Userid} = req.body;
-    const data = await  votingtable.findOne({where:{Userid : Userid}});
-    console.log("Printing",data);
-    if(data){
-      return res.status(200).json({auth:false , msg:"You have already voted."});
-    }else{
-       return res.status(200).json({auth:true ,msg:"You can vote!!!"})
+    const { Candidateid, Userid } = req.body;
+    const data = await votingtable.findOne({ where: { Userid: Userid } });
+    console.log("Printing", data);
+    if (data) {
+      return res
+        .status(200)
+        .json({ auth: false, msg: "You have already voted." });
+    } else {
+      return res.status(200).json({ auth: true, msg: "You can vote!!!" });
     }
-    
   } catch (error) {
-    return res.status(500).json({message:"Server Error! Try Again Later."});
+    return res.status(500).json({ message: "Server Error! Try Again Later." });
   }
-
 };
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-const getUserAddressFromAadhar = async (req, res) =>{
-try {
-  const reqid = req.params.reqid;
-  const address = await addresstable.findByPk(reqid);
-  res.json(address);
-} catch (error) {
-  return res.json(error);
-}
-
+const getUserAddressFromAadhar = async (req, res) => {
+  try {
+    const reqid = req.params.reqid;
+    const address = await addresstable.findByPk(reqid);
+    res.json(address);
+  } catch (error) {
+    return res.json(error);
+  }
 };
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+const addCandidateDetails = async (req, res) => {
+  try {
+    const data = req.body;
+    const response = await candidateregistration.create(data);
+    return res.json({ response: response }).status(200);
+  } catch (error) {
+    return res.json({ message: "Error in Saving Data to Database" });
+  }
+};
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// for storing files in the server machines
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'D:/upload');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+
+
+
+//stroing in the database
+router.post('/file-upload/:id', upload.fields([
+  { name: 'incomeCertificate', maxCount: 1 },
+  { name: 'addressCertificate', maxCount: 1 },
+  { name: 'criminalCaseProof', maxCount: 1 },
+  { name: 'education', maxCount: 1 },
+  { name: 'partyProofCertificate', maxCount: 1 }
+]), async (req, res) => {
+  console.log('Request body:', req.body); // Log the entire request body
+  const  AadhaarNumber  = req.params.id;
+  console.log("AadhaarNumber  : ", req.params.id);
+  const { incomeCertificate, addressCertificate, criminalCaseProof, education, partyProofCertificate} = req.files;
+
+  try {
+    const newFileDetail = await Filedetails.create({
+      CandidateAadhaar:AadhaarNumber,
+      IncomeProof: incomeCertificate[0].filename,
+      AddressProof: addressCertificate[0].filename,
+      PartyLetter: partyProofCertificate[0].filename,
+      QualificationFile:education[0].filename,
+      CriminalClearance:criminalCaseProof[0].filename
+    });
+    res.send('Form submitted successfully');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+// Get all files
+router.get("/files", async (req, res) => {
+  try {
+    const files = await Filedetails.findAll({});
+    res.json(files);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
+
+const path = require("path");
+const fs = require("fs");
+
+// Define a route to handle file downloads
+router.get("/download/:fileName", (req, res) => {
+  const fileName = req.params.fileName;
+  const filePath = path.join('E:/upload', fileName);
+
+  // Check if the file exists
+  if (fs.existsSync(filePath)) {
+    // Set the appropriate headers for the response
+    res.setHeader("Content-Disposition", `attachment; filename=${fileName}`);
+    res.setHeader("Content-Type", "application/octet-stream");
+
+    // Read the file and send it in the response
+    fs.createReadStream(filePath).pipe(res);
+  } else {
+    res.status(404).send("File not found");
+  }
+});
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 router.get("/votingresult", votingResult); // It is fetching  the result of election by counting votes for each candidate
 router.get("/:reqid", getUserCredential); // to fetch user credential
-router.post("/addDummyCandidate", addDummyCandidate);
+router.post("/addDummyCandidate", addDummyCandidate);// Had to replace with => { addCandidateDetails }
 router.post("/addelection", addElection);
 router.get("/get/election/list", getelectionlist);
 router.post("/get/candidate/list", fetchAllCandidate);
@@ -400,13 +488,14 @@ router.post("/fromaadhartable/:reqid", getAadharData); // to fetch aadhar data f
 router.post("/add/admin", addNewAdmin);
 router.post("/verify/admin", verifyAdmin);
 router.post("/addCandidate", postCredentialCandidate); // To Add Candidates Credentials
-router.get("/candidates/:reqid", getCandiCredential);
+router.post("/candidates/:reqid", getCandiCredential);
 router.post("/adduserinuserlogin", postUserCredential); //This will add user credential in user login table
 router.post("/verifyusercredential", verifyUserCredential); ///verify the credential with password {http://localhost:1234/verify}
 router.put("/update/candidate/status", updateStatusOfCandidate); //to update candidate status
 router.post("/verifyCandidateCredential", verifyCandidateCredential); ///verify the credential with password {http://localhost:1234/verify}
 router.post("/add/your/vote", addUserVote);
 router.post("/check/if/already/voted", checkVotingStatus); //It will check  whether the user has already voted or not
-router.post("/get/users/address/fromaadhar/:reqid",  getUserAddressFromAadhar); //To get user address from Aadhar
+router.post("/get/users/address/fromaadhar/:reqid", getUserAddressFromAadhar); //To get user address from Aadhar
+router.post("/add/candidate/registration/details", addCandidateDetails); //To  save the details of candidates who are registering themselves for election
 
 module.exports = router;
