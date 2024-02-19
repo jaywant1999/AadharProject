@@ -30,6 +30,9 @@ import UserHelp from "./Pages/User/UserHelp.js";
 import CandidateProfile from "./Pages/Candidate/CandidateProfile.js";
 import CandidateHelp from "./Pages/Candidate/CandidateHelp.js";
 import CandidateStatus from "./Pages/Candidate/CandidateStatus.js";
+import CandidateWelcomePage from  "./Pages/Candidate/CandidateWelcomePage.js";
+import UserWelcomePage from  "./Pages/User/UserWelcomePage.js";
+import AdminWelcomePage from "./Pages/Admin/AdminWelcomePage.js"
 
 export default function App() {
   return (
@@ -72,6 +75,9 @@ export default function App() {
               <Route path="/AdminHelp" element={<AdminHelp />} />
               <Route path="/AdminStatistics" element={<AdminStatistics />} />
               <Route path="/Card" element={<Card />} />
+              <Route path="/CandidateWelcomePage" element={<CandidateWelcomePage />} />
+              <Route path="/UserWelcomePage" element={<UserWelcomePage />} />
+              <Route path="/AdminWelcomePage" element={<AdminWelcomePage />} />
               
             </Routes>
           </BrowserRouter>

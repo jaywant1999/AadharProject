@@ -37,7 +37,8 @@ const getAadharData = async (req, res) => {
         .json({ message: "You are not eligible", key: true });
     }
 
-    res.status(200).json({ key: false , resource:resource});
+    // res.status(200).json({ key: false , resource:resource});
+    res.status(200).json({ resource});
   } catch (error) {
     console.error(error);
     res

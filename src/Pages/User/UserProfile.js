@@ -17,14 +17,15 @@ const UserProfile = () => {
       const response1 = await Axios.post(
         `http://127.0.0.1:1234/fromaadhartable/${aadhar}`
       );
-      console.log("Aadhar data::::",response1 );
+      console.log(response1);
+      // console.log("Aadhar data::::",response1 );
       setMyUserData(response1.data);
       const response2 = await Axios.post(
         `http://127.0.0.1:1234/get/users/address/fromaadhar/${aadhar}`
       );
-      console.log(" my Address : ", response2.data);
+      // console.log(" my Address : ", response2.data);
       setAddData(response2.data);
-      console.log("Address data::::",response1 );
+      // console.log("Address data::::",response1 );
     } catch (error) {
       console.error("Error fetching data:", error);
       alert("Please login First!!!");

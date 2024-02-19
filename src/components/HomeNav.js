@@ -27,21 +27,21 @@ import voter from "../images/votehand.png";
                 </li>
                 
                 <li>
-                    <a className="links" href="/Admin">
+                    <a className="links" href="/AdminWelcomePage">
                         <i className="fa-solid fa-user-tie"></i>
                         Admin 
                     </a>
                 </li>
                 
                 <li>
-                    <a className="links" href="/Candidate">
+                    <a className="links" href="/CandidateWelcomePage">
                         <i className="fa-solid fa-user-large"></i>
                         Candidate 
                     </a>
                 </li> 
                 
                 <li>
-                    <a className="links" href="/User">
+                    <a className="links" href="/UserWelcomePage">
                         <i className="fa-solid fa-users-line"></i>
                         User 
                     </a>
