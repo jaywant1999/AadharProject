@@ -269,7 +269,7 @@ const CandidateRegistration = () => {
             onChange={(e) =>
               setFormData({ ...formData, candidateaadhar: e.target.value })
             } 
-             name="c-annualIncome" />
+             name="c-aadharnumber" />
           </div>
 
           <div className="block">
@@ -464,7 +464,7 @@ const CandidateRegistration = () => {
           </div>
 
           <div className="block">
-            <label>Criminal Case Clearance Proof From Police Station </label>
+            <label>Clearance Proof From Police Station </label>
             <input
               id="other"
               type="file"

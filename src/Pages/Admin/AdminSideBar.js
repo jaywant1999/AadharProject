@@ -42,7 +42,7 @@ const AdminSideBar=({children})=>{
                 <div className='menu-icon'><i class="fa-solid fa-bars" onClick={toggle}/></div>
                     <h4 style={{display:isOpen ? "block" : "none"}} >Admin Dashboard</h4>
                 </div>
-                <hr style={{display:isOpen ? "block" : "block"}}/>
+                <hr/>
                 {
                     menuItem.map((items, index)=>(
                         <NavLink to={items.path} key={index} className="nav-links" activeclassName="active">

@@ -38,6 +38,7 @@ const CandidateProfile = () => {
         <>
         <CandidateSideBar/>
         <div className="c-profile-container">
+            <h1>Profile</h1>
             <form className="reg-form-container">
                 {formData.map((data, index) => (
                     <div className="block" key={index}>
