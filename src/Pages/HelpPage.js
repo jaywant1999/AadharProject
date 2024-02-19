@@ -155,7 +155,7 @@ const HelpPage = () => {
     <div className="help-page">
       <div className="help-container">
         <div className="help-section">
-          <h2>User Help</h2>
+          <h2>User Q&A</h2>
           <ul>
             {helpData.userHelp.map((item, index) => (
               <li key={index} onClick={() => handleItemClick(item)}>{item}</li>
@@ -163,7 +163,7 @@ const HelpPage = () => {
           </ul>
         </div>
         <div className="help-section">
-          <h2>Admin Help</h2>
+          <h2>Admin Q&A</h2>
           <ul>
             {helpData.adminHelp.map((item, index) => (
               <li key={index} onClick={() => handleItemClick(item)}>{item}</li>
@@ -171,7 +171,7 @@ const HelpPage = () => {
           </ul>
         </div>
         <div className="help-section">
-          <h2>Candidate Help</h2>
+          <h2>Candidate Q&A</h2>
           <ul>
             {helpData.candidateHelp.map((item, index) => (
               <li key={index} onClick={() => handleItemClick(item)}>{item}</li>
@@ -182,7 +182,8 @@ const HelpPage = () => {
       <div id='select-main'>
       <div className="selected-items">
         <h2>Click on the above questions to get the answers.</h2>
-        {renderHelpContent()}
+        <div className='ans-section'>{renderHelpContent()}</div>
+        
       </div>
       </div>
     </div>

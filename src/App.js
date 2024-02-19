@@ -23,7 +23,7 @@ import ValidateCandidate from "./Pages/Admin/ValidateCandidate"
 import UserVotingPage from  './Pages/User/UserVotingPage'
 import UserProfile from  "./Pages/User/UserProfile.js";
 import AdminProfile from "./Pages/Admin/AdminProfile.js";
-import CandidateRegisDemo from "./Pages/Candidate/CandidateRegisDemo.js";
+ 
 import Card from "./Pages/Admin/Card.js";
 import AdminStatistics from "./Pages/Admin/AdminStatistics.js";
 import UserHelp from "./Pages/User/UserHelp.js";
@@ -71,14 +71,12 @@ export default function App() {
               <Route path="/UserProfile" element={<UserProfile />} />
               <Route path="/AdminProfile" element={<AdminProfile />} />
               <Route path="/CandidateLoginPage" element={<CandidateLoginPage />} />
-              <Route path="/CandidateRegisDemo" element={<CandidateRegisDemo />} />
               <Route path="/AdminHelp" element={<AdminHelp />} />
               <Route path="/AdminStatistics" element={<AdminStatistics />} />
               <Route path="/Card" element={<Card />} />
               <Route path="/CandidateWelcomePage" element={<CandidateWelcomePage />} />
               <Route path="/UserWelcomePage" element={<UserWelcomePage />} />
               <Route path="/AdminWelcomePage" element={<AdminWelcomePage />} />
-              
             </Routes>
           </BrowserRouter>
         </div>

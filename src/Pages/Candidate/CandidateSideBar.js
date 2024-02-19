@@ -35,7 +35,7 @@ const CandidateSideBar=({children})=>{
             <div className={isOpen ? 'admin-sidebar': 'mobile-sidebar'}>
                 <div className='top-section'>
                 <div className='menu-icon'><i class="fa-solid fa-bars" onClick={toggle}/></div>
-                    <h4 style={{display:isOpen ? "block" : "none"}} >Admin Dashboard</h4>
+                    <h4 style={{display:isOpen ? "block" : "none"}} >Candidate Dashboard</h4>
                 </div>
                 <hr style={{display:isOpen ? "block" : "block"}}/>
                 {

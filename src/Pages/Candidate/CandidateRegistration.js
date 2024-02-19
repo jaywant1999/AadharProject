@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import "../../css/CandidateRegistration.css";
+import CandidateSideBar from "./CandidateSideBar";
 
 const CandidateRegistration = () => {
   const [candidateAadhar, setCandidateAadhar] = useState("");
@@ -225,6 +226,7 @@ const CandidateRegistration = () => {
 
   return (
     <>
+    <CandidateSideBar/>
       <form onSubmit={handleSubmit} id="c-reg-form">
         <div className="header">
           <h3> Personal Details</h3>
@@ -259,6 +261,15 @@ const CandidateRegistration = () => {
             onChange={(e) =>
               setFormData({ ...formData, dob: e.target.value })
             }name="c-dob" />
+          </div>
+
+          <div className="block">
+            <label>Aadhaar Number</label>
+            <input type="number"
+            onChange={(e) =>
+              setFormData({ ...formData, candidateaadhar: e.target.value })
+            } 
+             name="c-annualIncome" />
           </div>
 
           <div className="block">
@@ -423,14 +434,7 @@ const CandidateRegistration = () => {
             name="c-pincode" />
           </div>
 
-          {/* <div className="block">
-            <label>Area</label>
-            <input type="text"
-            onChange={(e) =>
-              setFormData({ ...formData, annualincome: e.target.value })///////////////////////////////////
-            } 
-            name="c-area" />
-          </div> */}
+          
 
           <div className="block">
             <label>Party Letter</label>
