@@ -25,7 +25,7 @@ const User = () => {
           return;
           // navigate(`/Home`);
         }
-        sessionStorage.setItem("aadhar", response.data.AadhaarNumber);
+        sessionStorage.setItem("aadhar", aadharID);
         setAadharID(response.data);
         console.log(response.data);
         alert("It will redirect to the user Otp page!");

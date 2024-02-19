@@ -59,13 +59,13 @@ const UserProfile = () => {
                 {myuserData.LastName}
               </td>
             </tr>
-            <tr>
+            {/* <tr>
               <td>Address:</td>
               <td>
                 {addData.Taluka} {addData.District}{" "}
                 {addData.State} {addData.Country} {addData.Pincode}
               </td>
-            </tr>
+            </tr> */}
             <tr>
               <td>Email:</td>
               <td>{myuserData.Email}</td>
