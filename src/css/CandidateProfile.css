@@ -1,0 +1,13 @@
+.c-profile-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 70px;
+}
+
+.adm-valid-container{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}

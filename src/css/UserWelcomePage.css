@@ -1,0 +1,102 @@
+.candidatewelcomepage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 95vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  color: #fcfbfb;
+  padding-top: -25px;
+  margin-top: -45px;
+  background:linear-gradient(
+    135deg,#f47843,white,rgb(102, 228, 102)
+  );
+  
+}
+
+
+.candidatewelcomecontainer {
+  max-width: 800px;
+
+  color: rgba(1, 15, 68, 0.9);
+  padding: 20px;
+  margin-top: 2px;
+  border-radius: 15px;
+  box-shadow: 0 10px 8px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.candidatewelcomecontainer p{
+  color: #021c72;
+}
+
+#header{
+  color: #021c72;
+}
+
+.candidateuser-icon { 
+  font-size: 60px;
+  color: #021c72;
+  margin-bottom: 40px;
+  animation: floatIcon 2s ease infinite; /* Example animation */
+}
+
+@keyframes floatIcon {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.candidatewelcomecontainer h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #333; /* Example text color */
+}
+
+.welcome-text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #555; /* Example text color */
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  gap: 150px;
+  font-weight: bold;
+  text-decoration: none;
+}
+#reg-btn{
+  text-decoration: none;
+  padding: 10px;
+  width: 100px;
+  border-radius: 30px;
+}
+
+#reg-btn:hover{
+  background: #021c72;
+  padding: 10px;
+  color: #fcfbfb;
+  border-radius: 30px;
+ width: 100px;
+ 
+}
+  
+
+ 
+
+ 
+
+@media all and (max-width:900px){
+  .welcome-text {
+     overflow: scroll;
+  }
+}

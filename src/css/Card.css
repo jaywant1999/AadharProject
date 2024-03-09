@@ -1,0 +1,59 @@
+.adminaddcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    width: 100%;
+    margin-top: 20px;
+    text-decoration: none;
+
+    /* z-index: -1; */
+  }
+  .card-container a{
+text-decoration: none;
+  }
+  
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 80%;
+    margin-left: 10%;
+    text-decoration: none;
+  }
+  
+  .card {
+    text-align: start;
+    width: 360px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+
+   
+  }
+  
+  .card-content {
+    padding: 25px;
+  }
+  
+  .candidate-name {
+    margin: 0;
+  }
+   .c-detailed-info{
+    color: black;
+   }
+  .c-detailed-info:hover{
+    background: #c88787;
+    color:rgb(252, 252, 252);
+    cursor: pointer;
+    text-decoration: none;
+    
+  }
+  
+  @media screen and (max-width:380px) {
+    .card{
+      width: 270px;
+    }
+  }

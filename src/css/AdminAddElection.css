@@ -1,0 +1,51 @@
+/* AddElection.css */
+.election-container{
+    margin-top: 50px;
+    justify-content: center;
+    width:100%;
+    padding: 100px;
+    
+}
+.Addelection-admin {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#election {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#election-date{
+    font-size:15px;
+    font-weight: bold;
+}
+
+
+.Addelection-admin input {
+  width:275px;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#election-btn{
+  width: 100px;
+ justify-content: center;
+  padding: 10px ;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #72aeef;
+}

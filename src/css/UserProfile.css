@@ -1,0 +1,28 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .profile-box {
+    width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 120px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  }
+  
+  .profile-table {
+    width: 100%;
+  }
+  
+  .profile-table td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .profile-table td:first-child {
+    font-weight: bold;
+    white-space: nowrap;
+  }

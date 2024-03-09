@@ -1,0 +1,8 @@
+.adminhome{
+  width: 100%;
+  height: 85vh; /* Adjust height as needed */
+  background-image: url("../images/admin.jpg");
+  background-size: cover; /* Adjust background size if necessary */
+  background-position: center; /* Adjust background position if necessary */
+  z-index: -1;
+}

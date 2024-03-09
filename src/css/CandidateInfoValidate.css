@@ -1,0 +1,86 @@
+.validate-main-div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+align-items: center;
+padding-top: 100px;
+}
+.admin-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.card-div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90%;
+    padding: 10px;
+    margin-top:-50px ;
+   
+}
+
+.c-card{
+    display: flex;
+    flex-wrap: wrap;
+    width:80%;
+    gap: 20px;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px 5px rgb(181, 181, 181);
+}
+.c-card input{
+     width: 350px;
+}
+
+.candidate-card{
+display: flex;
+flex-direction: column;
+box-shadow: 0px 0px 15px 5px rgb(181, 181, 181);
+width: 70%;
+align-content: center;
+padding: 50px;
+margin-bottom: 50px;
+border-radius:15px ;
+}
+
+#c-actions{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    margin: 40px;
+    margin-top: 20px;
+}
+
+.c-content{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+border-radius:15px ;
+}
+
+
+@media all and(max-width:900px){
+
+    .c-card #input{
+        width: 150px;
+    }
+
+    
+.c-content{
+    font-size: 10px;
+}
+
+.candidate-card label{
+    font-size: 10px;
+}
+}

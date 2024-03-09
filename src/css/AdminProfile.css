@@ -1,0 +1,43 @@
+
+.admin-profile-container {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    width: 100%;
+
+   
+  }
+  
+  .profile-box {
+    width: 400px;
+    height: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 150px;
+    box-shadow:  0px 0px 10px 10px rgb(189, 189, 189);
+    font-size: 80%;
+    border-radius: 10px;
+  }
+  
+  
+  .profile-table {
+    width: 100%;
+  }
+  
+  .profile-table td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .profile-table td:first-child {
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  @media all and (max-width:900px){
+
+    .profile-box h2{
+      font-size: 25px;
+    }
+  }

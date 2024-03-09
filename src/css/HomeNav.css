@@ -1,0 +1,214 @@
+.NavbarItems{
+    background: rgb(14, 22, 95);
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    padding: 0px 20px;
+    box-shadow: 0px 0px 10px 3px rgb(83, 81, 81);
+    border-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    width:100%;
+    height: 100px;
+    font-family:Arial, Helvetica, sans-serif;
+    margin: -5px;
+    margin-right: 0;
+}
+
+#img1{
+    width: 60px;
+    height: 60px;
+    margin-left: -7px;
+    margin-top: 15px;
+}
+
+
+ul{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction:row;
+    align-content: center;
+    margin-top: 30px;
+}
+
+.Navbar-logo{
+    position: absolute;
+    text-align: start;
+    background:linear-gradient(
+        135deg,#ee4e0a,white,rgb(5, 219, 5)
+      );
+      background-clip:text;
+      -webkit-text-fill-color: transparent;
+      font-size: 25px;
+      top:5%;
+ 
+    padding-top: 5px;
+      margin-top: 15px;
+      margin-left: 60px;
+     
+}
+
+ 
+.menu{
+    display: flex;
+    grid-template-columns: repeat(5);
+    list-style: none;
+    align-items: end;
+    justify-content: flex-end;
+    grid-gap: 15px;
+    width: 100%;
+}
+
+.links{
+    text-decoration: none;
+    color: rgb(251, 248, 248);
+    font-size: 20px;
+    font-weight: 550;
+    padding:10px; 
+    white-space: nowrap;
+     
+}
+
+.links i{
+    padding-right: 10px;
+    margin-left: 10px;
+}
+
+.links:hover{
+    border-radius: 10px;
+    background-color:rgb(255, 255, 255);
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    transition: all 0.2s ease-in-out;
+    width: 100%;
+    border-color:black;
+   
+}
+
+nav .menu{
+    
+    display: none;
+    position: absolute;
+    top: -10px;
+    right: 30px;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 50px;
+    
+}
+
+nav .menu span{
+  
+    height: 40px;
+    width: 100%;
+    background: whitesmoke;
+    border-radius: 0.3rem;
+   
+
+}
+ul li{
+    list-style: none;
+   
+}
+
+#navigator{
+    margin: 0;
+    display: none;
+}
+
+
+
+@media screen and (max-width:1000px) {
+
+    .NavbarItems{
+        align-items: flex-start;
+    }
+
+
+    nav .menu{
+        display: flex;
+        top: 30px;
+         
+    }
+
+    nav{
+        flex-direction: column;
+        background: #011042;
+        z-index: 1;
+    }
+
+    nav ul{
+        display: none;
+        justify-content: center;
+        flex-direction:column;
+        align-items: center;
+        background: rgb(14, 22, 95);
+        width: 100%;
+        margin: 0;
+        margin-top: 10px;
+        z-index: 1;
+         
+    }
+
+    .links i{
+        padding-right: 0;
+        margin: 10px;
+    }
+    #img1{
+        align-content: flex-start;
+        width: 60px;
+        height: 60px;
+        margin-right: 10px;
+        position: sticky;
+        left: 0;
+        margin-left: -7px;
+        margin-top: 15px;
+    }
+
+    .Navbar-logo{
+          margin-top: 21px;
+          margin-left: -3px;
+          position: sticky;
+          left: 0;
+          text-align: start;
+        
+    }
+
+     nav .open{
+        display: flex;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+        margin-left: 0px;
+        padding: 0;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;        
+     }
+
+     .links:hover{
+        border-radius: 10px;
+        background: none;
+        color: aliceblue;
+        text-decoration: underline;
+        transition: all 0.2s ease-in-out;
+        width: 100%;
+        #navigator{
+            display: block;
+        } 
+    }
+
+    .logocontent{
+        margin-left: 0;
+        display: flex;
+        align-items: flex-start;
+        justify-content:flex-start;
+        position: sticky;
+        left: 0;
+    }
+
+    
+
+    
+}
