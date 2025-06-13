@@ -9,7 +9,7 @@ import voter from "../images/votehand.png";
     
         return(
            <nav className="NavbarItems">
-            <div className="logocontent"><img id="img1" src={voter}/><h1 className="Navbar-logo"><b>मेरा देश, <br/>मेरा चुनाव ...</b></h1></div>
+            <div className="logocontent"><img id="img1" src={voter} alt="voter"/><h1 className="Navbar-logo"><b>मेरा देश, <br/>मेरा चुनाव ...</b></h1></div>
             <div className="menu" onClick={()=>{
                 setMenuOpen(!menuOpen)
             }}>

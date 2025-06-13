@@ -5,65 +5,55 @@ import Axios from "axios";
 
 const UserLogin = () => {
   const navigate = useNavigate();
-  const [aadharID, setAadharID] = useState("");//Temporary field might delete later
   const [loginData, setLoginData] = useState({
-    /**
-     * This useState is used when we inserting wrong credential, it will clear the input field
-     */
     AadhaarNumber: "",
     password: "",
   });
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleInputChange = (e) => {
-    /**
-     *This method is responsible  for taking value of each fields and setting them to empty.
-     */
-    const { name, value } = e.target;
-    setLoginData({ ...loginData, [name]: value });
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
-  const geToUserHome = async (e) => {
+  const goToUserHome = async (e) => {
     e.preventDefault();
+    setErrorMessage(""); // Clear previous errors
 
     try {
       const response = await Axios.post(
-        `http://localhost:1234/verifyusercredential`, //This will check if the user is regestered or not
+        "http://localhost:1234/verifyusercredential",
         loginData,
         {
-          validateStatus: function (status) {
-            return status >= 200 && status < 500;
-          },
+          validateStatus: (status) => status >= 200 && status < 500,
         }
       );
-      sessionStorage.setItem("aadhar", response.data.AadhaarNumber); //Not working
-      setAadharID(response.data);
-      console.log(response.data);
-      if (response.status === 200) {
-        alert("Redirecting to UserHomePage");
-         navigate("/UserHomePage");
+
+      if (response.status === 200 && response.data?.AadhaarNumber) {
+        sessionStorage.setItem("aadhar", response.data.AadhaarNumber);
+        navigate("/UserHomePage");
       } else {
-        console.log(response);
-        alert("User not found OR invalid password");
-        setLoginData({ AadhaarNumber: "", password: "" });
+        setErrorMessage("User not found or invalid password.");
+        
       }
     } catch (error) {
-      console.error("Error:", error);
-      alert("An error occurred. Please try again later.");
+      console.error("Login Error:", error);
+      setErrorMessage("An error occurred. Please try again later.");
     }
   };
 
   return (
     <div>
-      <form onSubmit={geToUserHome}>
+      <form onSubmit={goToUserHome}>
         <div className="login-container">
           <h1>Login</h1>
+          {errorMessage && <p className="error">{errorMessage}</p>}
           <div className="input-container">
             <input
               type="number"
               name="AadhaarNumber"
               value={loginData.AadhaarNumber}
               onChange={handleInputChange}
-              placeholder="Enter Aadhar Number"
+              placeholder="Enter Aadhaar Number"
               required
             />
           </div>
@@ -79,7 +69,7 @@ const UserLogin = () => {
           </div>
           <button id="user-log" type="submit">Login</button>
           <p>
-            Not registered? <a href="/User">SignUp Here</a>
+            Not registered? <a href="/User">Sign Up Here</a>
           </p>
         </div>
       </form>

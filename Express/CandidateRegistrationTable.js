@@ -2,7 +2,7 @@ const { BIGINT, STRING, DATE, DOUBLE, ENUM, INTEGER } = require("sequelize");
 const { Sequelize } = require("./Database");
 
 const candidateregistration = Sequelize.define(
-  "candidateregistrationfinal",
+  "candidateregistration",
   {
     candidateaadhar: {
       type: BIGINT,

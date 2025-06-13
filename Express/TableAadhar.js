@@ -7,31 +7,48 @@ const aadhartable = Sequelize.define(
     AadhaarNumber: {
       type: BIGINT,
       primaryKey: true,
+      allowNull: false,
+      validate: {
+        min: 100000000000,
+        max: 999999999999,
+      },
     },
-
     FirstName: {
-      type: STRING,
+      type: STRING(45),
+      allowNull: false,
     },
     MiddleName: {
-      type: STRING,
+      type: STRING(45),
+      allowNull: true,
     },
     LastName: {
-      type: STRING,
+      type: STRING(45),
+      allowNull: false,
     },
     Gender: {
-      type: ENUM("m", "f", "o"),
+      type: ENUM("M", "F", "O"),
+      allowNull: false,
     },
     DOB: {
       type: DATE,
+      allowNull: false,
     },
     MobileNumber: {
-      type: STRING,
+      type: STRING(10),
+      allowNull: false,
+      unique: true,
+      validate: {
+        len: [10, 10],
+        isNumeric: true,
+      },
     },
     Email: {
-      type: STRING,
+      type: STRING(100),
+      allowNull: false,
+      unique: true,
     },
   },
   { timestamps: false, freezeTableName: true }
 );
 
-module.exports = {aadhartable};
+module.exports = { aadhartable };

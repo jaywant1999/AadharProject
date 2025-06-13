@@ -1,11 +1,11 @@
-const { INTEGER, STRING } = require("sequelize");
+const { STRING } = require("sequelize");
 const { Sequelize } = require("./Database");
 
 const admintable = Sequelize.define(
-  "adminlogin",
+  "adminlogintable",
   {
     id: {
-      type: INTEGER,
+      type: STRING,
       primaryKey: true,
     },
     password: {

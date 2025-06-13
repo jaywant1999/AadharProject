@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../css/Admin.css";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
-import "../css/SetPassword.css"
+import "../css/SetPassword.css" 
 
 const Admin = () => {
   const [aadhar, setAaadhar] = useState("");
@@ -15,7 +15,9 @@ const Admin = () => {
       id: aadhar,
       password: password,
     };
-
+  
+    console.log("🔍 Sending Login Request:", loginData); // Debugging
+  
     try {
       const response = await Axios.post(
         `http://127.0.0.1:1234/verify/admin`,
@@ -26,13 +28,15 @@ const Admin = () => {
           },
         }
       );
-
+  
+      console.log("✅ Server Response:", response.data); // Debugging
+  
       if (response.status === 200) {
         alert("Logged in successfully");
         navigate("/AdminHome");
       } else {
-        // console.log(response);
-        alert("Access forbidden!!!"); // Display the error message from the server
+        console.error("🚨 Access Denied:", response.data);
+        alert("Access forbidden!!!");
         navigate("/Admin");
       }
     } catch (error) {

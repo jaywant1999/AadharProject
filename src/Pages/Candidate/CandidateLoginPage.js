@@ -11,43 +11,49 @@ const CandidateLoginPage = () => {
     AadhaarNumber: "",
     password: "",
   });
+
+  const [errorMessage, setErrorMessage] = useState("");
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setLoginData({ ...loginData, [name]: value });
   };
 
-  const goToAdminHome = async (e) =>{
+  const goToCandidateHome = async (e) => {
     e.preventDefault();
+    setErrorMessage(""); // Clear previous errors
+
     try {
       const response = await Axios.post(
-        `http://localhost:1234/verifyCandidateCredential`, //This will check if the user is regestered or not
+        "http://localhost:1234/verifyCandidateCredential",
         loginData,
         {
-          validateStatus: function (status) {
-            return status >= 200 && status < 500;
-          },
+          validateStatus: (status) => status >= 200 && status < 500,
         }
       );
 
-      if (response.status === 200) {
-        alert("Redirecting to UserHomePage");
+      if (response.status === 200 && response.data?.AadhaarNumber) {
+        sessionStorage.setItem("aadhar", response.data.AadhaarNumber);
+        alert("Redirecting to Candidate Home Page");
         navigate("/CandidateHomePage");
       } else {
-        console.log(response);
-        alert("Candidate not found");
+        setErrorMessage(response.data.message || "Invalid credentials");
         setLoginData({ AadhaarNumber: "", password: "" });
       }
     } catch (error) {
-      console.error("Error:", error);
-      alert("An error occurred. Please try again later.");
+      console.error("Login Error:", error);
+      setErrorMessage("An error occurred. Please try again later.");
     }
   };
 
   return (
     <div>
       <div className="form-container">
-        <form onSubmit={goToAdminHome}>
+        <form onSubmit={goToCandidateHome}>
           <h2>Candidate Login</h2>
+
+          {errorMessage && <p className="error">{errorMessage}</p>}
+
           <label>
             Aadhar Number:
             <input
@@ -60,6 +66,7 @@ const CandidateLoginPage = () => {
             />
           </label>
           <br />
+
           <label>
             Password:
             <input
@@ -72,14 +79,17 @@ const CandidateLoginPage = () => {
             />
           </label>
           <br />
+
           <button type="submit">Login</button>
+
           <p>
-            Not registered?<a href="/Candidate">SignUp Here</a>
+            Not registered? <a href="/Candidate">Sign Up Here</a>
           </p>
         </form>
       </div>
     </div>
   );
 };
+
 
 export default CandidateLoginPage;

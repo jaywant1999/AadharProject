@@ -11,7 +11,7 @@ const UserHomePage = () => {
     <UserSideBar/>
    <div className="userhomepage">
     <div className="usersubhome">
-      <img src={img}></img>
+      <img alt="img" src={img}></img>
     </div>
     </div>  
 </>

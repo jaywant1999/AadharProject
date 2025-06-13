@@ -1,23 +1,28 @@
 .profile-container {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
+    min-height: 100%;
   }
   
-  .profile-box {
+  .user-profile-box {
     width: 400px;
-    padding: 20px;
+    padding: 30px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 120px;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    box-shadow:  0px 0px 10px 10px rgb(164, 163, 197);
+    font-size: 90%;
+    border-radius: 10px;
   }
   
   .profile-table {
     width: 100%;
+    padding: 20px;
   }
   
   .profile-table td {
+    text-align: start;
     padding: 8px;
     border-bottom: 1px solid #ddd;
   }
@@ -25,4 +30,11 @@
   .profile-table td:first-child {
     font-weight: bold;
     white-space: nowrap;
+  }
+
+  #adressd{
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    align-items: center;
   }

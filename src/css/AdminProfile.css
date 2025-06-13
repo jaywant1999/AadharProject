@@ -10,12 +10,10 @@
   
   .profile-box {
     width: 400px;
-    height: 300px;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;
     margin-top: 150px;
-    box-shadow:  0px 0px 10px 10px rgb(189, 189, 189);
+    box-shadow:  0px 0px 10px 10px rgb(164, 163, 197);
     font-size: 80%;
     border-radius: 10px;
   }

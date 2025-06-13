@@ -12,6 +12,7 @@ const sequelize = require("sequelize");
 const { addresstable } = require("./AddressTable");
 const { candidateregistration } = require("./CandidateRegistrationTable");
 const { Filedetails } = require("./FileTable");
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * => getAadharData {This API  is used to fetch the data of user with given AADHAR number}
@@ -134,28 +135,33 @@ const postUserCredential = async (req, res) => {
 const verifyUserCredential = async (req, res) => {
   const { AadhaarNumber, password } = req.body;
 
-  // Checking empty fields
+  console.log(`🔍 Received Login Request: AadhaarNumber=${AadhaarNumber}, Password=${password}`);
+
   if (!AadhaarNumber || !password) {
+    console.log("❌ Missing Fields");
     return res.status(400).json({ message: "Please enter all the details" });
   }
 
-  // Retrieving user data from the local server
-  let userData = await logintable.findByPk(AadhaarNumber);
+  let userData = await logintable.findOne({ where: { AadhaarNumber } });
 
   if (!userData) {
+    console.log("❌ User Not Found");
     return res.status(404).json({ message: "Data does not exist" });
-  } else {
-    const match = await bcrypt.compare(password, userData.password); //Returns boolean value  whether it matches or not
-    // Comparing hashed password with entered password using bcrypt compare method
-    if (!match) {
-      return res.status(401).json({ message: "Invalid Password!" });
-    } else {
-      return res.status(200).json({
-        message: "Valid User!",
-        AadhaarNumber: userData.AadhaarNumber,
-      });
-    }
   }
+
+  console.log(`✅ User Found: ${JSON.stringify(userData.dataValues)}`);
+
+  // Directly compare the plain text passwords
+  if (password !== userData.password) {
+    console.log("❌ Invalid Password!");
+    return res.status(401).json({ message: "Invalid Password!" });
+  }
+
+  console.log("✅ Password Matched! Login Successful.");
+  return res.status(200).json({
+    message: "Valid User!",
+    AadhaarNumber: userData.AadhaarNumber,
+  });
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -298,22 +304,30 @@ const addNewAdmin = async (req, res) => {
 const verifyAdmin = async (req, res) => {
   const { id, password } = req.body;
 
-  if (!id || !password) {
-    return res.status(400).json({ message: "Please enter all the details" });
-  } else {
-    let admin = await admintable.findByPk(id);
+  console.log(`🔍 Received Login Request: ${JSON.stringify(req.body)}`);
 
-    if (!admin) {
-      return res.status(404).json({ message: "Data does not exist" });
-    } else {
-      const validPass = await bcrypt.compare(password, admin.password);
-      if (!validPass) {
-        return res.status(401).json({ message: "Invalid Password!" });
-      } else {
-        return res.status(200).json({ message: "Valid User!" });
-      }
-    }
+  if (!id || !password) {
+    console.log(" Missing Fields");
+    return res.status(400).json({ message: "Please enter all the details" });
   }
+
+  let admin = await admintable.findByPk(id);
+
+  if (!admin) {
+    console.log(" Admin Not Found");
+    return res.status(404).json({ message: "Data does not exist" });
+  }
+
+  console.log(`✅ Admin Found: ${JSON.stringify(admin.dataValues)}`);
+
+  // Since passwords are stored in plain text, directly compare them
+  if (password !== admin.password) {
+    console.log(" Invalid Password!");
+    return res.status(401).json({ message: "Invalid Password!" });
+  }
+
+  console.log("✅ Password Matched! Login Successful.");
+  return res.status(200).json({ message: "Valid User!" });
 };
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 const updateStatusOfCandidate = async (req, res) => {
@@ -331,24 +345,56 @@ const updateStatusOfCandidate = async (req, res) => {
 const verifyCandidateCredential = async (req, res) => {
   const { AadhaarNumber, password } = req.body;
 
-  // Checking empty fields
   if (!AadhaarNumber || !password) {
     return res.status(400).json({ message: "Please enter all the details" });
   }
 
-  // Retrieving user data from the local server
-  let userData = await candiTable.findByPk(AadhaarNumber);
+  try {
+    console.log(`Checking AadhaarNumber: ${AadhaarNumber}`); // Debugging
 
-  if (!userData) {
-    return res.status(404).json({ message: "Data does not exist" });
-  } else {
-    const match = await bcrypt.compare(password, userData.password); //Returns boolean value  whether it matches or not
-    // Comparing hashed password with entered password using bcrypt compare method
-    if (!match) {
-      return res.status(401).json({ message: "Invalid Password!" });
-    } else {
-      return res.status(200).json({ message: "Valid User!" });
+    // Retrieve user data from the database
+    let userData = await candiTable.findOne({ where: { AadhaarNumber } });
+
+    if (!userData) {
+      console.log("User not found in database"); // Debugging
+      return res.status(404).json({ message: "User not found" });
     }
+
+    console.log("User found:", userData.dataValues); // Debugging
+
+    const storedPassword = userData.password;
+
+    // Check if the stored password is hashed
+    const isHashed = storedPassword.startsWith("$2b$");
+
+    let match = false;
+
+    if (isHashed) {
+      // If password is hashed, compare using bcrypt
+      match = await bcrypt.compare(password, storedPassword);
+    } else {
+      // If stored password is plain text, do a direct comparison
+      match = password === storedPassword;
+
+      // Convert plain-text password to hashed for future security
+      const hashedPassword = await bcrypt.hash(storedPassword, 10);
+      await userData.update({ password: hashedPassword });
+      console.log("Converted plain-text password to hashed format.");
+    }
+
+    if (!match) {
+      console.log("Password does not match!"); // Debugging
+      return res.status(401).json({ message: "Invalid Password!" });
+    }
+
+    return res.status(200).json({
+      message: "Valid User!",
+      AadhaarNumber: userData.AadhaarNumber,
+    });
+
+  } catch (error) {
+    console.error("Login Error:", error);
+    return res.status(500).json({ message: "Server error" });
   }
 };
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -411,11 +457,12 @@ const checkVotingStatus = async (req, res) => {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 const getUserAddressFromAadhar = async (req, res) => {
   try {
-    const reqid = req.params.reqid;
-    const address = await addresstable.findByPk(reqid);
+    const aadhar = req.params.aadhar;
+    const address = await addresstable.findByPk(aadhar);
+    console.log("Address from DB:", address);
     res.json(address);
   } catch (error) {
-    return res.json(error);
+    return res.status(500).json({ error: "Server error", details: error });
   }
 };
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -534,7 +581,9 @@ const getCandidateFiles = async (req, res) => {
     return res.json(error);
   }
 };
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 router.get("/votingresult", votingResult); // It is fetching  the result of election by counting votes for each candidate
 router.get("/:reqid", getUserCredential); // to fetch user credential
 router.post("/addDummyCandidate", addDummyCandidate); // Had to replace with => { addCandidateDetails }
@@ -542,7 +591,7 @@ router.post("/addelection", addElection);
 router.get("/get/election/list", getelectionlist);
 router.post("/get/candidate/list", fetchAllCandidate);
 router.post("/fromaadhartable/:reqid", getAadharData);
-router.post("/fromaadhartabledata/:reqid", getAadharData1); // to fetch aadhar data from Aadhaar Table
+router.get("/fromaadhartabledata/:reqid", getAadharData1); // to fetch aadhar data from Aadhaar Table
 router.post("/add/admin", addNewAdmin);
 router.post("/verify/admin", verifyAdmin);
 router.post("/addCandidate", postCredentialCandidate); // To Add Candidates Credentials
@@ -553,7 +602,7 @@ router.put("/update/candidate/status", updateStatusOfCandidate); //to update can
 router.post("/verifyCandidateCredential", verifyCandidateCredential); ///verify the credential with password {http://localhost:1234/verify}
 router.post("/add/your/vote", addUserVote);
 router.post("/check/if/already/voted", checkVotingStatus); //It will check  whether the user has already voted or not
-router.post("/get/users/address/fromaadhar/:reqid", getUserAddressFromAadhar); //To get user address from Aadhar
+router.get("/get/users/address/fromaadhar/:aadhar", getUserAddressFromAadhar); //To get user address from Aadhar
 router.post("/add/candidate/registration/details", addCandidateDetails); //To  save the details of candidates who are registering themselves for election
 router.post("/get/candidateregistration", getCandidateDetails);
 router.post("/get/candidate/by/:id", getCandidateByID);
