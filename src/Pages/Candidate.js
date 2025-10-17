@@ -14,7 +14,7 @@ const Candidate = () => {
       console.log(`${aadharID}`);
 
       const isCandiExist = await Axios.post(
-        `http://127.0.0.1:1234/candidates/${aadharID}`
+        `http://localhost/candidates/${aadharID}`
       );
       console.log("isCandiExist.data.isExist : ", isCandiExist.data);
 

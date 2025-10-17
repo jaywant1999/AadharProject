@@ -20,7 +20,7 @@ const Admin = () => {
   
     try {
       const response = await Axios.post(
-        `http://127.0.0.1:1234/verify/admin`,
+        `http://localhost:1234/verify/admin`,
         loginData,
         {
           validateStatus: function (status) {
