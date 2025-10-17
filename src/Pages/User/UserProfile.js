@@ -52,57 +52,64 @@ const UserProfile = () => {
 
   return (
     <>
-      <UserSideBar />
+      <div className="user-profile-wrapper">
+        
+        <div className="sidebar">
+          <UserSideBar />
+        </div>
 
-      <div className="profile-container">
-        <div className="user-profile-box">
-          <h2>User Profile</h2>
-          <table className="profile-table">
-            <tbody>
-              <tr>
-                <td>Aadhar Number:</td>
-                <td>{myuserData.AadhaarNumber}</td>
-              </tr>
-              <tr>
-                <td>Name:</td>
-                <td>
-                  {myuserData.FirstName}
-                  {"    "}
-                  {myuserData.MiddleName}
-                  {"    "}
-                  {myuserData.LastName}
-                </td>
-              </tr>
-              <tr>
-                <td>Address:</td>
-                <td>
-                  <div id="adressd">
-                    {addData
-                      ? `${addData.Taluka || ""}, ${addData.District || ""}, ${
-                          addData.State || ""
-                        }, ${addData.Country || ""}, ${addData.Pincode || ""}`
-                      : "Loading..."}
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>Email:</td>
-                <td>{myuserData.Email}</td>
-              </tr>
-              <tr>
-                <td>Date of Birth:</td>
-                <td>{myuserData.DOB}</td>
-              </tr>
-              <tr>
-                <td>Gender:</td>
-                <td>{myuserData.Gender}</td>
-              </tr>
-              <tr>
-                <td>Mobile Number:</td>
-                <td>{myuserData.MobileNumber}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div className="profile-container">
+          <div className="user-profile-box">
+            <h2 id="heading">User Profile</h2>
+            <table className="profile-table">
+              <tbody>
+                <tr>
+                  <td>Aadhar Number :</td>
+                  <td>{myuserData.AadhaarNumber}</td>
+                </tr>
+                <tr>
+                  <td>Name :</td>
+                  <td>
+                    {myuserData.FirstName}
+                    {"    "}
+                    {myuserData.MiddleName}
+                    {"    "}
+                    {myuserData.LastName}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Address :</td>
+                  <td>
+                    <div id="adressd">
+                      {addData
+                        ? `${addData.Taluka || ""}, ${
+                            addData.District || ""
+                          }, ${addData.State || ""}, ${
+                            addData.Country || ""
+                          }, ${addData.Pincode || ""}`
+                        : "Loading..."}
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Email :</td>
+                  <td>{myuserData.Email}</td>
+                </tr>
+                <tr>
+                  <td>Date of Birth :</td>
+                  <td>{myuserData.DOB}</td>
+                </tr>
+                <tr>
+                  <td>Gender :</td>
+                  <td>{myuserData.Gender}</td>
+                </tr>
+                <tr>
+                  <td>Mobile Number :</td>
+                  <td>{myuserData.MobileNumber}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </>

@@ -21,11 +21,12 @@
   
   .profile-table {
     width: 100%;
+    border-radius: 5px;
   }
   
   .profile-table td {
     padding: 8px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #2807a9;
   }
   
   .profile-table td:first-child {
