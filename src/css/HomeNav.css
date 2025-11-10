@@ -2,43 +2,56 @@
   background: rgb(14, 22, 95);
   display: flex;
   justify-content: space-between;
-  align-items: start; 
+  align-items: start;
   box-shadow: 0px 0px 10px 3px rgb(83, 81, 81);
-  border-radius: 10px;  
+  border-radius: 10px;
   width: 100%;
-  height: 110px;
+  height: 100px;
   font-family: Arial, Helvetica, sans-serif;
   margin: -5px;
-  margin-right: 0;
+  padding: 15px;
+  padding-bottom: 0px;
+  align-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 #img1 {
   width: 60px;
-  height: 60px;
-  margin-left: 0px;
-  padding-left: 5px;
-  margin-top: 15px;
+  height: 60px; 
 }
 
 ul {
   display: flex;
   justify-content: flex-end;
-  flex-direction: row;
+  justify-items: center;
+  align-items: center;
   align-content: center;
-  margin-top: 30px;
+  text-align: center;
+}
+
+.logocontent {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
 }
 
 .Navbar-logo {
-  position: absolute;
+  position: relative;
   text-align: start;
   background: linear-gradient(135deg, #ee4e0a, white, rgb(5, 219, 5));
   background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 25px;
-  top: 5%;
-  padding-top: 5px;
-  margin-top: 15px;
-  margin-left: 60px;
+  top: 5px;
+  width: 150px;
+  display: flex;
+  align-items: center;
+}
+
+.Navbar-logo p {
+  padding: 5px;
+  margin: 0px;
 }
 
 .menu {
@@ -56,7 +69,7 @@ ul {
   color: rgb(251, 248, 248);
   font-size: 20px;
   font-weight: 550;
-  padding: 10px;
+  padding:5px 25px 5px 5px;
   white-space: nowrap;
 }
 
@@ -66,12 +79,12 @@ ul {
 }
 
 .links:hover {
-  border-radius: 10px;
+  border-radius: 25px;
   background-color: rgb(255, 255, 255);
   text-decoration: none;
   color: rgb(14, 22, 95);
   transition: all 0.2s ease-in-out;
-  width: 100%; 
+  width: 100%;
   transition: all 0.3s ease-in-out;
   transform: scale(1.05);
 }
@@ -121,72 +134,43 @@ ul li {
 
   nav ul {
     display: none;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     background: rgb(14, 22, 95);
     width: 100%;
-    margin: 0; 
     z-index: 1;
   }
 
-  .links{
+  .links {
     font-size: x-small;
-    padding: 5px;
+    padding: 8px;
   }
 
   .links i {
     padding-right: 0;
     margin: 5px;
     margin-bottom: 10px;
-     
-  }
-  #img1 {
-    align-content: flex-start;
-    width: 60px;
-    height: 60px;
-    margin-right: 10px;
-    position: sticky;
-    left: 0;
-    margin-left: 0px;
-    margin-top: 15px;
-  }
-
-  .Navbar-logo {
-    margin-top: 15px;
-    margin-left: -7px;
-    position: sticky;
-    left: 0;
-    text-align: start;
   }
 
   nav .open {
     display: flex;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    margin-left: 0px;
     padding: 2px;
     padding-bottom: 5px;
-    padding-top: 5px; 
+    padding-top: 5px;
     width: 100%;
     justify-content: space-around;
     align-items: center;
     z-index: 1;
-    transition: all 0.3s ease-in-out; 
+    transition: all 0.3s ease-in-out;
   }
 
-  .links:hover {  
+  .links:hover {
     width: 100%;
+    border-radius: 15px;
     #navigator {
       display: block;
     }
-  }
-
-  .logocontent {
-    margin-left: 0;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    position: sticky;
-    left: 0;
   }
 }

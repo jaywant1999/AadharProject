@@ -10,10 +10,10 @@ function Homenav() {
       <div className="logocontent">
         <img id="img1" src={voter} alt="voter" />
         <h1 className="Navbar-logo">
-          <b>
+          <p>
             मेरा देश, <br />
             मेरा चुनाव ...
-          </b>
+          </p>
         </h1>
       </div>
       <div
