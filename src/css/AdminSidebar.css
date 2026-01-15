@@ -14,7 +14,6 @@
     transition: all 0.5s;
     border-top-right-radius: 35px;
     border-bottom-right-radius: 35px;
-    
 }
 
  
@@ -49,25 +48,23 @@
     font-size: 30px;
 }
 
- 
- 
 .nav-links{
     color: #ffffff;
-    align-items: center;
-    padding: 5px;
+    align-items: center; 
+    padding-bottom: 5px ;
     display: flex;
-    width:100%;
+    width:90%;
     text-align: start;
     gap: 35px;
- 
-
+    margin: auto;
+    margin-bottom: 5px;
+    border-radius: 5px;
 }
 
 .nav-links:hover{
     text-decoration: none;
     background: #fafafa;
     color: black;
- 
 }
 
 .admin-s-container{
@@ -76,17 +73,13 @@
     width: 220px;
     height: 100vh;
     margin-top:-15px;
-    margin-left: 5px;
-   
-    
+    margin-left: 5px;   
 }
 
 .admin-close-sidebar{
     margin-top: 1px;
     height: 50px;
     margin-left: 5px;
-    
-  
 }
 
 .active{

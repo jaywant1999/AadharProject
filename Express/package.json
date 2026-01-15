@@ -7,7 +7,8 @@
     "multer": "^1.4.5-lts.1",
     "mysql2": "^3.11.5",
     "nodemon": "^3.0.3",
-    "sequelize": "^6.36.0"
+    "sequelize": "^6.36.0",
+    "sqlite3": "^5.1.7"
   },
   "name": "trial",
   "version": "1.0.0",
